@@ -3,9 +3,31 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" lang="en"/>
+		<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Fredoka:wght@500&family=Handlee&display=swap" rel="stylesheet">
+		<title>Pacman Game</title>
+		<style>
+			body {
+				font-family: "Fredoka", sans-serif;
+				font-size: 30px;
+				background: #ebf7f9;
+				min-height: 100vh;
+				padding: 1rem;
+			}
+		</style>
 	</head>
 
 	<body>
+		<header>
+			<h1>Lea Eva Kramer</h1>
+		</header>
+		<nav>
+			<a href="#welcome">Welcome</a>
+			<a href="#register">Register</a>
+			<a href="#login">Login</a>
+			<a href="#about">About</a>
+			<div class="animation start-home"></div>
+		</nav>
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
