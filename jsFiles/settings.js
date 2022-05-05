@@ -45,3 +45,21 @@ function DisplaychosenKey(key_pressed)
 	else if(key_pressed == 37) return "⇦";
 	else return String.fromCharCode(event.keyCode);
 }
+
+var foodSlider = document.getElementById("foodRange");
+var output = document.getElementById("foodValue");
+output.innerHTML = foodSlider.value;
+
+foodSlider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+var timeSlider = document.getElementById("timeRange");
+var output2 = document.getElementById("timeValue");
+output2.innerHTML = timeSlider.value;
+
+timeSlider.oninput = function() {
+  output2.innerHTML = this.value;
+}
+
+
