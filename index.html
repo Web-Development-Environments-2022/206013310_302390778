@@ -13,6 +13,14 @@
 				min-height: 100vh;
 				padding: 1rem;
 			}
+			p,
+			label {
+				font: 1rem 'Fira Sans', sans-serif;
+			}
+
+			input {
+				margin: .4rem;
+			}
 		</style>
 	</head>
 
@@ -50,6 +58,76 @@
 								<input id="buttonDown" class="choose-keyboard" type="button" value="⇩" placeholder="Enter Down key"  onclick="updateKeyborads(`DOWN`)" required>
 							</li>
 						</ul>
+					</div>
+					<br>
+					<div id="settings-numOfBalls" align="center">
+						<label>Choose number of food:</label>
+						<div class="slidecontainer">
+							<input id="foodRange" name="foodSliderRange" type="range" min="50" max="90" value="70" class="slider">
+							<p>FoodValue: <span id="foodValue"></span></p>
+						</div>
+					</div>
+					<br>
+					<div id="settings-colorsOfFood" align="center">
+						<div id="basicFoogColor">
+							<label>Choose color of basic food:</label>
+							<input type="color" id="basic" name="head" value="#e63365">
+							<label>60% of the food</label>
+							<label>5 points</label>
+						</div>
+						<div id="specialFoogColor">
+							<label>Choose color for special food:</label>
+							<input type="color" id="special" name="head" value="f6b73c">
+							<label>30% of the food</label>
+							<label>15 points</label>
+						</div>
+						<div id="gourmetFoogColor">
+							<label>Choose color of gourmet food:</label>
+							<input type="color" id="gourmet" name="head" value="#e63365">
+							<label>10% of the food</label>
+							<label>25 points</label>
+						</div>
+					</div>
+					<div id="settings-numOfSecoundGame" align="center">
+						<label>Choose game long:</label>
+						<div class="slidecontainer">
+							<input id="timeRange" name="timeSliderRange" type="range" min="1" max="15" value="3" class="slider">
+							<p>Time (in minute): <span id="timeValue"></span></p>
+						</div>
+					</div>
+					<div id="settings-numOfGhosts" align="center">
+						<label>Choose game long:</label>
+						<div class="slidecontainer">
+							<input id="ghostRange" name="ghostSliderRange" type="range" min="1" max="15" value="3" class="slider">
+							<p>Number of ghost: <span id="ghostValue"></span></p>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div id="settings-numOfGhost" align="center">
+					<label>Choose number of ghosts:</label>
+					<div id="radioButtonGhost">
+						<fieldset>						
+							<div>
+							  <input type="radio" id="huey" name="drone" value="huey" checked>
+							  <label for="huey">One</label>
+							</div>
+						
+							<div>
+							  <input type="radio" id="dewey" name="drone" value="dewey">
+							  <label for="dewey">Two</label>
+							</div>
+						
+							<div>
+							  <input type="radio" id="louie" name="drone" value="louie">
+							  <label for="louie">Three</label>
+							</div>
+
+							<div>
+								<input type="radio" id="louie" name="drone" value="louie">
+								<label for="louie">Four</label>
+							  </div>
+						</fieldset>
 					</div>
 				</div>
 			</div>
@@ -106,6 +184,9 @@
 		<script type="text/javascript" src="./jsFiles/menu.js"></script>
 		<script type="text/javascript" src="./jsFiles/login.js"></script>
 		<script type="text/javascript" src="./jsFiles/settings.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+
 		
 	</body>
 </html>
