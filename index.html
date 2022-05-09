@@ -3,31 +3,14 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="cssFiles/style.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/setting.css" lang="en"/>
+		<link rel="stylesheet" type="text/css" href="cssFiles/login.css" lang="en"/>
 		<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Fredoka:wght@500&family=Handlee&display=swap" rel="stylesheet">
 		<title>Pacman Game</title>
-		<style>
-			body {
-				font-family: "Fredoka", sans-serif;
-				font-size: 30px;
-				background: #ebf7f9;
-				min-height: 100vh;
-				padding: 1rem;
-			}
-			p,
-			label {
-				font: 1rem 'Fira Sans', sans-serif;
-			}
-
-			input {
-				margin: .4rem;
-			}
-		</style>
 	</head>
 
 	<body>
 		<div id="Header">
 			<header>
-				<h1>Lea Eva Kramer</h1>
 			</header>
 		</div>
 		<div id="Menu">
@@ -44,92 +27,110 @@
 			</div>
 			<br>
 			<div id="settings" class="screen">
-				<div id="settings-containert">
-					<div id="key-settings">
-						<ul id="chooseButtons" align="center">
-							<li>
-								<input id="buttonUp" class="choose-keyboard" type="button" value="⇧" placeholder="Enter Up key"  onclick="updateKeyborads(`UP`)" required>
-							</li>
-							<li>
-								<input id="buttonLeft" class="choose-keyboard" type="button" value="⇦" placeholder="Enter Left key"  onclick="updateKeyborads(`LEFT`)" required>
-								<input id="buttonRight" class="choose-keyboard" type="button" value="➪" placeholder="Enter Right key"   onclick="updateKeyborads(`RIGHT`)" required>
-							</li>	
-							<li>
-								<input id="buttonDown" class="choose-keyboard" type="button" value="⇩" placeholder="Enter Down key"  onclick="updateKeyborads(`DOWN`)" required>
-							</li>
-						</ul>
-					</div>
-					<br>
-					<div id="settings-numOfBalls" align="center">
-						<label>Choose number of food:</label>
-						<div class="slidecontainer">
-							<input id="foodRange" name="foodSliderRange" type="range" min="50" max="90" value="70" class="slider">
-							<p>FoodValue: <span id="foodValue"></span></p>
+				<form id ="form-settings">
+					<div id="settings-container">
+						<div id="key-settings">
+							<ul id="settings-chooseButtons" align="center">
+								<label>Choose movments keys</label>
+								<br>
+								<li>
+									<input id="buttonUp" class="choose-keyboard" type="button" value="⇧" placeholder="Enter Up key" style="cursor: pointer;" onclick="updateKeyborads(`UP`)" required>
+								</li>
+								<br>
+								<li>
+									<input id="buttonLeft" class="choose-keyboard" type="button" value="⇦" placeholder="Enter Left key" style="cursor: pointer;" onclick="updateKeyborads(`LEFT`)" required>
+								</li>
+								<li>	
+									<input id="buttonRight" class="choose-keyboard" type="button" value="➪" placeholder="Enter Right key" style="cursor: pointer;"  onclick="updateKeyborads(`RIGHT`)" required>
+								</li>
+								<br>	
+								<li>
+									<input id="buttonDown" class="choose-keyboard" type="button" value="⇩" placeholder="Enter Down key" style="cursor: pointer;" onclick="updateKeyborads(`DOWN`)" required>
+								</li>
+							</ul>
 						</div>
-					</div>
-					<br>
-					<div id="settings-colorsOfFood" align="center">
-						<div id="basicFoogColor">
-							<label>Choose color of basic food:</label>
-							<input type="color" id="basic" name="head" value="#e63365">
-							<label>60% of the food</label>
-							<label>5 points</label>
-						</div>
-						<div id="specialFoogColor">
-							<label>Choose color for special food:</label>
-							<input type="color" id="special" name="head" value="f6b73c">
-							<label>30% of the food</label>
-							<label>15 points</label>
-						</div>
-						<div id="gourmetFoogColor">
-							<label>Choose color of gourmet food:</label>
-							<input type="color" id="gourmet" name="head" value="#e63365">
-							<label>10% of the food</label>
-							<label>25 points</label>
-						</div>
-					</div>
-					<div id="settings-numOfSecoundGame" align="center">
-						<label>Choose game long:</label>
-						<div class="slidecontainer">
-							<input id="timeRange" name="timeSliderRange" type="range" min="1" max="15" value="3" class="slider">
-							<p>Time (in minute): <span id="timeValue"></span></p>
-						</div>
-					</div>
-					<div id="settings-numOfGhosts" align="center">
-						<label>Choose game long:</label>
-						<div class="slidecontainer">
-							<input id="ghostRange" name="ghostSliderRange" type="range" min="1" max="15" value="3" class="slider">
-							<p>Number of ghost: <span id="ghostValue"></span></p>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div id="settings-numOfGhost" align="center">
-					<label>Choose number of ghosts:</label>
-					<div id="radioButtonGhost">
-						<fieldset>						
-							<div>
-							  <input type="radio" id="huey" name="drone" value="huey" checked>
-							  <label for="huey">One</label>
+						<!-- <div id="ghosts-settings" align="center">
+							<label align="center">Choose number of ghosts:</label>
+							<div class="list-choice">
+								<div class="list-choice-title">---</div>
+								<div class="list-choice-objects">
+								<label>
+									<input type="radio"/><span>1</span>
+								</label>
+								<label>
+									<input type="radio"/><span>2</span>
+								</label>
+								<label>
+									<input type="radio"/><span>3</span>
+								</label>
+								<label>
+									<input type="radio"/><span>4</span>
+								</label>
+								</div>
 							</div>
-						
-							<div>
-							  <input type="radio" id="dewey" name="drone" value="dewey">
-							  <label for="dewey">Two</label>
+						</div> -->
+						<div id="settings-numOfGhost" align="center">
+					
+							<div id="radioButtonGhost">
+								<label>Choose number of ghosts:</label>
+								<fieldset>					
+									<div>
+									  <input type="radio" id="huey" name="drone" value="huey" checked>
+									  <label class="txt" for="huey" style="cursor: pointer;">One</label>
+									</div>
+								
+									<div>
+									  <input type="radio" id="dewey" name="drone" value="dewey">
+									  <label class="txt" for="dewey" style="cursor: pointer;">Two</label>
+									</div>
+								
+									<div>
+									  <input type="radio" id="louie" name="drone" value="louie">
+									  <label class="txt" for="louie" style="cursor: pointer;">Three</label>
+									</div>
+		
+									<div>
+										<input type="radio" id="louie" name="drone" value="louie">
+										<label class="txt" for="louie" style="cursor: pointer;">Four</label>
+									  </div>
+								</fieldset>
 							</div>
-						
-							<div>
-							  <input type="radio" id="louie" name="drone" value="louie">
-							  <label for="louie">Three</label>
+						</div>
+						<div id="settings-numOfSecoundGame" align="center">
+							<label>Choose game long</label>
+							<div class="slidecontainer">
+								1
+								<input id="timeRange" name="timeSliderRange" type="range" min="1" max="15" value="3" class="slider" style="cursor: pointer;">
+								15
+								<p class="txt">selected (in minute):<span id="timeValue"></span></p>
 							</div>
-
-							<div>
-								<input type="radio" id="louie" name="drone" value="louie">
-								<label for="louie">Four</label>
-							  </div>
-						</fieldset>
+						</div>
+						<div id="settings-numOfBalls" align="center">
+							<label>Choose number of food</label>
+							<div class="slidecontainer">
+								50
+								<input id="foodRange" name="foodSliderRange" type="range" min="50" max="90" value="70" class="slider" style="cursor: pointer;">
+								90
+								<p class="txt">selected:<span id="foodValue"></span></p>
+							</div>
+						</div>
+						<div id="settings-colorsOfFood" align="center">
+							<div id="basicFoogColor">
+								<label>Choose color of basic food-</label>
+								<input type="color" id="basic" name="head" value="#04fcdb">
+							</div>
+							<div id="specialFoogColor">
+								<label>Choose color for special food-</label>
+								<input type="color" id="special" name="head" value="#04fc57" style="cursor: pointer;">							
+							</div>
+							<div id="gourmetFoogColor">
+								<label>Choose color of gourmet food-</label>
+								<input type="color" id="gourmet" name="head" value="#e63365" style="cursor: pointer;">
+							</div>
+						</div>
 					</div>
-				</div>
+				</form>
+				
 			</div>
 			<div id="Register" class="screen">
 				reg
@@ -153,10 +154,12 @@
 					  <br>
 					  <a onclick="switchScreen('Register')">dont have account? click here to register</a>
 				</form> -->
-				<form>
-					<input type="text" id="username" placeholder="User Name" required>
-					<input type="password" id="password" placeholder="Password" required>
-					<button type="button" onclick="getInfo()">Log In</button>
+				<br>
+				<br>
+				<form id="login-form">
+					<input type="text" id="login-username" placeholder="User Name" required>
+					<input type="password" id="login-pass" placeholder="Password" required>
+					<button type="button" id="login-btn" onclick="getInfo()">Log In</button>
 				</form>
 			</div>
 			<div id="About" class="screen">

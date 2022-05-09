@@ -25,20 +25,20 @@ var objPeople = [
 ]
 
 function getInfo() {
-	var username = document.getElementById('username').value
-	var password = document.getElementById('password').value
+	var username = document.getElementById('login-username').value
+	var password = document.getElementById('login-pass').value
 
 	for(var i = 0; i < objPeople.length; i++) {
 		// check is user input matches username and password of a current index of the objPeople array
 		if(username == objPeople[i].username && password == objPeople[i].password) {
 			alert(username + " is logged in!!!")
-            document.getElementById('username').value = ""
-            document.getElementById('password').value = ""
+            document.getElementById('login-username').value = ""
+            document.getElementById('login-pass').value = ""
 			switchScreen('settings')
 			return
 		}
 	}
-    document.getElementById('username').value = ""
-    document.getElementById('password').value = ""
+    document.getElementById('login-username').value = ""
+    document.getElementById('login-pass').value = ""
 	alert("incorrect username or password")
 }
