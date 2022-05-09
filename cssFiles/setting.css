@@ -1,4 +1,13 @@
-/* --------------------------------------------buttons setting */
+/* --------------------------------------------form setting */
+#form-settings{
+  background-color: black;
+  border: 2px solid;
+  padding: 20px; 
+  width: 300px;
+  resize: both;
+  overflow: auto;
+  margin: 0px auto;
+}
 
 
 /* --------------------------------------------keyboards selecting */

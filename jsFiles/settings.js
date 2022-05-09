@@ -3,6 +3,13 @@ let chosen_key_code_down = 40;
 let chosen_key_code_left = 37;
 let chosen_key_code_right = 39;
 let chosen_keys = {}
+let num_of_ghosts = 1
+let game_long = 3
+let number_of_food = 70
+let basic_food_color = "#04fcdb"
+let special_food_color = "#04fc57"
+let gourmet_food_color = "#e63365"
+
 
 function updateKeyborads(direction){
     $(document).keydown(function(event){
@@ -62,4 +69,45 @@ timeSlider.oninput = function() {
   output2.innerHTML = this.value;
 }
 
+function startGame()
+{
+    if (document.getElementById("oneG").checked = true){
+        num_of_ghosts = 1
+    }
+    else if (document.getElementById("twoG").checked = true){
+        num_of_ghosts = 2
+    }
+    else if (document.getElementById("threeG").checked = true){
+        num_of_ghosts = 3
+    }
+    else{
+        num_of_ghosts = 4
+    }
+    game_long = document.getElementById("timeRange").value;
+    number_of_food = document.getElementById("foodRange").value;
+    basic_food_color = document.getElementById("basic").value;
+    special_food_color = document.getElementById("special").value;
+    gourmet_food_color = document.getElementById("gourmet").value;
+    // prepareGame()
 
+    var f = document.getElementById("form-settings");
+    f.style.marginRight = 0;
+    f.style.width = "200px";
+    f.style.height = "400px";
+    var g = document.getElementById("game");
+    g.style.marginLeft = 0;
+    g.style.marginTop = 0;
+    switchScreen("game");
+    $("#settings").show();
+    // $("#game").show()
+    // var f = document.getElementById("game");
+    // f.style.marginLeft = 0;
+
+    // f.style.left = parseInt(f.style.left) - 200 + 'px';
+    // var g = document.getElementById("game");
+    // g.style.marginLeft = "0px";
+    // g.style.marginTop = "0px";
+    // var g = document.getElementById("game");
+    // g.style.marginLeft = "0px";
+    // g.style.marginTop = "0px";
+}
