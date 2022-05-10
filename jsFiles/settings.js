@@ -5,7 +5,7 @@ let chosen_key_code_right = 39;
 let chosen_keys = {}
 let num_of_ghosts = 1
 let game_long = 3
-let number_of_food = 70
+let number_of_food = 60
 let basic_food_color = "#04fcdb"
 let special_food_color = "#04fc57"
 let gourmet_food_color = "#e63365"
@@ -71,20 +71,20 @@ timeSlider.oninput = function() {
 
 function startGame()
 {
-    if (document.getElementById("oneG").checked = true){
+    if (document.getElementById("oneG").checked == true){
         num_of_ghosts = 1
     }
-    else if (document.getElementById("twoG").checked = true){
+    else if (document.getElementById("twoG").checked == true){
         num_of_ghosts = 2
     }
-    else if (document.getElementById("threeG").checked = true){
+    else if (document.getElementById("threeG").checked == true){
         num_of_ghosts = 3
     }
     else{
         num_of_ghosts = 4
     }
-    game_long = document.getElementById("timeRange").value;
-    number_of_food = document.getElementById("foodRange").value;
+    game_long = parseInt(document.getElementById("timeRange").value);
+    number_of_food = parseInt(document.getElementById("foodRange").value);
     basic_food_color = document.getElementById("basic").value;
     special_food_color = document.getElementById("special").value;
     gourmet_food_color = document.getElementById("gourmet").value;
@@ -99,6 +99,7 @@ function startGame()
     // g.style.marginTop = 0;
     // switchScreen("game");
     $("#game").show();
+    Start();
     // $("#game").show()
     // var f = document.getElementById("game");
     // f.style.marginLeft = 0;

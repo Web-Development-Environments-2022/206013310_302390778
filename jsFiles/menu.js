@@ -11,5 +11,8 @@ function switchScreen(id){
 }
 
 function hideScreens(){
+    if(interval != null){
+        window.clearInterval(interval);
+    }
     $(".screen").hide();
 }

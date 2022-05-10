@@ -40,5 +40,5 @@ function getInfo() {
 	}
     document.getElementById('login-username').value = ""
     document.getElementById('login-pass').value = ""
-	alert("incorrect username or password")
+	alert("incorrect username or password, try again")
 }

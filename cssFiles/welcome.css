@@ -1,0 +1,16 @@
+.welcome-btn{
+    /* padding: 15px; */
+    background: #6c65ad;
+    color: #fff;
+    font-size: 20px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    margin: 0px auto;
+    border-radius: 80px;
+    border-color: black;
+    width: 200px;
+    margin: 0px auto;
+    /* padding: 50%; */
+
+}

@@ -4,6 +4,8 @@
 		<link rel="stylesheet" type="text/css" href="cssFiles/style.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/setting.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/login.css" lang="en"/>
+		<link rel="stylesheet" type="text/css" href="cssFiles/welcome.css" lang="en"/>
+		<link rel="stylesheet" type="text/css" href="cssFiles/register.css" lang="en"/>
 		<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Fredoka:wght@500&family=Handlee&display=swap" rel="stylesheet">
 		<title>Pacman Game</title>
 	</head>
@@ -22,8 +24,13 @@
 			</nav>
 		</div>
 		<div id="content-continer">
-			<div id="Welcome" class="screen">
-				welcome
+			<div id="Welcome" class="screen" align="center">
+				<div>
+					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Register')" style="margin: 50px auto; padding: 40px;">Random Settings</button>
+				</div>
+				<div>
+					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Login-screen')" style=" margin: 50px auto; padding: 30px;">Random Settings</button>
+				</div>
 			</div>
 			<br>
 			<div id="settings" class="screen" style="position: flex;">
@@ -49,26 +56,6 @@
 								</li>
 							</ul>
 						</div>
-						<!-- <div id="ghosts-settings" align="center">
-							<label align="center">Choose number of ghosts:</label>
-							<div class="list-choice">
-								<div class="list-choice-title">---</div>
-								<div class="list-choice-objects">
-								<label>
-									<input type="radio"/><span>1</span>
-								</label>
-								<label>
-									<input type="radio"/><span>2</span>
-								</label>
-								<label>
-									<input type="radio"/><span>3</span>
-								</label>
-								<label>
-									<input type="radio"/><span>4</span>
-								</label>
-								</div>
-							</div>
-						</div> -->
 						<div id="settings-numOfGhost" align="center">
 					
 							<div id="radioButtonGhost">
@@ -99,10 +86,10 @@
 						<div id="settings-numOfSecoundGame" align="center">
 							<label>Game long</label>
 							<div class="slidecontainer">
-								1
-								<input id="timeRange" name="timeSliderRange" type="range" min="1" max="15" value="3" class="slider" style="cursor: pointer;">
-								15
-								<p class="txt">selected (in minute):<span id="timeValue"></span></p>
+								60
+								<input id="timeRange" name="timeSliderRange" type="range" min="60" max="180" value="70" class="slider" style="cursor: pointer;">
+								180
+								<p class="txt">selected (in secounds):<span id="timeValue"></span></p>
 							</div>
 						</div>
 						<div id="settings-numOfBalls" align="center">
@@ -144,34 +131,24 @@
 							<label id="l2" for="lblTime">TIME:</label>
 							<input id="lblTime" type="text" />
 						</div>
-						<canvas id="canvas" height="600" width="600"></canvas>
+						<canvas id="canvas" height="600" width="600" style="background-color: rgb(6, 7, 7);"></canvas>
 					</div>	
 				</div>
 			</div>
 			
 
 			<div id="Register" class="screen">
-				reg
+				<br>
+				<br>
+				<form id="register-form">
+					<input type="text" id="reg-name" placeholder="User Name" required>
+					<input type="password" id="reg-pass" placeholder="Password" required>
+					<input type="email" id="reg-email" placeholder="E-mail" required>
+					<input type="text" id="reg-fullname" placeholder="Full Name" required>
+					<button type="submit" id="reg-btn" onclick="getInfo()">Register</button>
+				</form>
 			</div>
 			<div id="Login-screen" class="screen">
-				<!-- <form id ="logForm">
-						<h2>Log In</h2>
-						<table id="login-table">
-							<tr>
-								<th class="form-part">
-									<input id="username" type="text" placeholder="User Name" name="username"  required>
-								</th>
-							</tr>
-							<tr>
-								<th class="form-part">
-									<input id="password" type="password" placeholder="Password" name="password" required>
-								</th>
-							</tr>
-						</table>
-					  <input class="btn1" type="submit" id="submit-login" class="logBtn" value="Log In">
-					  <br>
-					  <a onclick="switchScreen('Register')">dont have account? click here to register</a>
-				</form> -->
 				<br>
 				<br>
 				<form id="login-form">
