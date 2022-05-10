@@ -90,15 +90,15 @@ function startGame()
     gourmet_food_color = document.getElementById("gourmet").value;
     // prepareGame()
 
-    var f = document.getElementById("form-settings");
-    f.style.marginRight = 0;
-    f.style.width = "200px";
-    f.style.height = "400px";
-    var g = document.getElementById("game");
-    g.style.marginLeft = 0;
-    g.style.marginTop = 0;
-    switchScreen("game");
-    $("#settings").show();
+    // var f = document.getElementById("form-settings");
+    // f.style.marginRight = 0;
+    // f.style.width = "200px";
+    // f.style.height = "400px";
+    // var g = document.getElementById("game");
+    // g.style.marginLeft = 0;
+    // g.style.marginTop = 0;
+    // switchScreen("game");
+    $("#game").show();
     // $("#game").show()
     // var f = document.getElementById("game");
     // f.style.marginLeft = 0;

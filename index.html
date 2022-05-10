@@ -26,12 +26,12 @@
 				welcome
 			</div>
 			<br>
-			<div id="settings" class="screen">
-				<form id ="form-settings">
+			<div id="settings" class="screen" style="position: flex;">
+				<form id ="form-settings" style="float: right;">
 					<div id="settings-container">
 						<div id="key-settings">
 							<ul id="settings-chooseButtons" align="center">
-								<label>Choose movments keys</label>
+								<label>Movments keys</label>
 								<br>
 								<li>
 									<input id="buttonUp" class="choose-keyboard" type="button" value="⇧" placeholder="Enter Up key" style="cursor: pointer;" onclick="updateKeyborads(`UP`)" required>
@@ -72,7 +72,7 @@
 						<div id="settings-numOfGhost" align="center">
 					
 							<div id="radioButtonGhost">
-								<label>Choose number of ghosts:</label>
+								<label>Number of ghosts:</label>
 								<fieldset>					
 									<div>
 									  <input type="radio" id="oneG" name="drone" value="huey" checked>
@@ -97,7 +97,7 @@
 							</div>
 						</div>
 						<div id="settings-numOfSecoundGame" align="center">
-							<label>Choose game long</label>
+							<label>Game long</label>
 							<div class="slidecontainer">
 								1
 								<input id="timeRange" name="timeSliderRange" type="range" min="1" max="15" value="3" class="slider" style="cursor: pointer;">
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 						<div id="settings-numOfBalls" align="center">
-							<label>Choose number of food</label>
+							<label>Number of food</label>
 							<div class="slidecontainer">
 								50
 								<input id="foodRange" name="foodSliderRange" type="range" min="50" max="90" value="70" class="slider" style="cursor: pointer;">
@@ -116,25 +116,39 @@
 						</div>
 						<div id="settings-colorsOfFood" align="center">
 							<div id="basicFoogColor">
-								<label>Choose color of basic food-</label>
+								<label>Color of basic food-</label>
 								<input type="color" id="basic" name="head" value="#04fcdb">
 							</div>
 							<div id="specialFoogColor">
-								<label>Choose color for special food-</label>
+								<label>Color for special food-</label>
 								<input type="color" id="special" name="head" value="#04fc57" style="cursor: pointer;">							
 							</div>
 							<div id="gourmetFoogColor">
-								<label>Choose color of gourmet food-</label>
+								<label>Color of gourmet food-</label>
 								<input type="color" id="gourmet" name="head" value="#e63365" style="cursor: pointer;">
 							</div>
 						</div>
 					</div>
 					<button type="button" id="btnRandomSettings" onclick="randomSettings()" >Random Settings</button>
-					<button type="button" id="btnStartGame" onclick="startGame()">Start Game</button>
+					<button type="button" id="btnStartGame" onclick="startGame()">Go</button>
 				</form>
 				<!-- <button type="button" id="btnRandomSettings" onclick="randomSettings()" >Random Settings</button>
 				<button type="button" id="btnStartGame" onclick="startGame()">Start Game</button> -->
+				<div id="game" class="screen" style="float: center; margin: 0px auto; padding: 40px;"> 
+					<div  align="center">
+						<div id="score">
+							<label id="l1" for="lblScore">SCORE:</label>
+							<input id="lblScore" type="text" />
+						</div>
+						<div id="time">
+							<label id="l2" for="lblTime">TIME:</label>
+							<input id="lblTime" type="text" />
+						</div>
+						<canvas id="canvas" height="600" width="600"></canvas>
+					</div>	
+				</div>
 			</div>
+			
 
 			<div id="Register" class="screen">
 				reg
@@ -170,7 +184,7 @@
 				about
 			</div>
 			<!-- code they gave us -->
-			<div id="game" class="screen" align="center">
+			<!-- <div id="game" class="screen" align="center">
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -180,7 +194,7 @@
 					<input id="lblTime" type="text" />
 				</div>
 				<canvas id="canvas" height="600" width="600"></canvas>			
-			</div>
+			</div> -->
 		</div>
 
 

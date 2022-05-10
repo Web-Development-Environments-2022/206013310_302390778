@@ -1,12 +1,16 @@
 /* --------------------------------------------form setting */
 #form-settings{
-  background-color: black;
+  background-color: rgb(54, 92, 122);
   border: 2px solid;
-  padding: 20px; 
-  width: 300px;
+  /* padding: 20px;  */
+  width: 250px;
   resize: both;
   overflow: auto;
   margin: 0px auto;
+  border-radius: 30px;
+  border-style: double;
+  border-width: 10px;
+  border-color: rgb(255, 235, 14);
 }
 
 

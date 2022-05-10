@@ -7,9 +7,10 @@ body {
 	font-family: "Fredoka", sans-serif;
 	font-size: 15px;
 	background: url("back_game2.png");
-	background-size: cover;
+	background-repeat: no-repeat;
 	min-height: 100vh;
 	padding: 1rem;
+	background-size: cover;
 }
 p {
 	font: 1rem 'Fira Sans', sans-serif;
@@ -21,8 +22,17 @@ label {
 	text-align: center;
 	margin: 0.5px 0 10px;
 	font-size: 16px;
-	color: rgb(253, 236, 2);
-	text-shadow: 0.5px 0.5px 1px #eef1ff; 
+	color: black;
+	/* text-shadow: 0.5px 0.5px 1px #eef1ff;  */
+	font-family: 'Handlee', sans-serif;
+	font-weight: bold;
+}
+#l1, #l2{
+	text-align: center;
+	margin: 0.5px 0 10px;
+	font-size: 16px;
+	color: rgb(243, 229, 26);
+	/* text-shadow: 0.5px 0.5px 1px #eef1ff;  */
 	font-family: 'Handlee', sans-serif;
 	font-weight: bold;
 }
@@ -30,7 +40,7 @@ label {
 	text-align: center;
 	margin: 0px 0 10px;
 	font-size: 13.5px;
-	color: #d2d2f3;
+	color: rgb(255, 255, 255);
 	font-family: 'Handlee', cursive;
 	white-space: normal ;
 	font-weight: bold;
