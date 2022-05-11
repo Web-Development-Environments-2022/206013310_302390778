@@ -232,7 +232,7 @@ function GetKeyPressed() {
 	if (keysDown[chosen_key_code_left]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[chosen_key_code_right]) {
 		return 4;
 	}
 }

@@ -27,17 +27,17 @@ function updateKeyborads(direction){
             document.getElementById("buttonDown").value = chosen_key_down;
             chosen_keys['down'] = chosen_key_code_down;
             break;
-        case "LEFT":
-            chosen_key_left=  DisplaychosenKey(key_pressed);
-            chosen_key_code_left = key_pressed;
-            document.getElementById("buttonLeft").value = chosen_key_left;
-            chosen_keys['left'] = chosen_key_code_left;
-            break;
         case "RIGHT":
             chosen_key_right=  DisplaychosenKey(key_pressed);
             chosen_key_code_right = key_pressed;
             document.getElementById("buttonRight").value = chosen_key_right;
             chosen_keys['right'] = chosen_key_code_right;
+            break;
+        case "LEFT":
+            chosen_key_left=  DisplaychosenKey(key_pressed);
+            chosen_key_code_left = key_pressed;
+            document.getElementById("buttonLeft").value = chosen_key_left;
+            chosen_keys['left'] = chosen_key_code_left;
             break;
     }
     $(document).unbind();
@@ -88,27 +88,6 @@ function startGame()
     basic_food_color = document.getElementById("basic").value;
     special_food_color = document.getElementById("special").value;
     gourmet_food_color = document.getElementById("gourmet").value;
-    // prepareGame()
-
-    // var f = document.getElementById("form-settings");
-    // f.style.marginRight = 0;
-    // f.style.width = "200px";
-    // f.style.height = "400px";
-    // var g = document.getElementById("game");
-    // g.style.marginLeft = 0;
-    // g.style.marginTop = 0;
-    // switchScreen("game");
     $("#game").show();
     Start();
-    // $("#game").show()
-    // var f = document.getElementById("game");
-    // f.style.marginLeft = 0;
-
-    // f.style.left = parseInt(f.style.left) - 200 + 'px';
-    // var g = document.getElementById("game");
-    // g.style.marginLeft = "0px";
-    // g.style.marginTop = "0px";
-    // var g = document.getElementById("game");
-    // g.style.marginLeft = "0px";
-    // g.style.marginTop = "0px";
 }
