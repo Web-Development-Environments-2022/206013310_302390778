@@ -1,6 +1,6 @@
 .welcome-btn{
     /* padding: 15px; */
-    background: #6c65ad;
+    background-image: linear-gradient(#6c65ad, rgb(212, 0, 255));
     color: #fff;
     font-size: 20px;
     border: 0;
@@ -9,8 +9,10 @@
     margin: 0px auto;
     border-radius: 80px;
     border-color: black;
-    width: 200px;
+    width: 170px;
     margin: 0px auto;
-    /* padding: 50%; */
-
+    
+    font-family: "Fredoka", sans-serif;
+	text-shadow: 1px 1px 2px black, 0 0 25px rgb(255, 255, 252), 0 0 5px rgb(7, 7, 7);
+	cursor: pointer;
 }

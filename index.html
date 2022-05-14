@@ -6,6 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="cssFiles/login.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/welcome.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/register.css" lang="en"/>
+		<link rel="stylesheet" type="text/css" href="cssFiles/footer.css" lang="en">
+		<!-- <a href="https://www.flaticon.com/free-icons/gaming" title="gaming icons">Gaming icons created by inipagistudio - Flaticon</a> -->
 		<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Fredoka:wght@500&family=Handlee&display=swap" rel="stylesheet">
 		<title>Pacman Game</title>
 	</head>
@@ -24,12 +26,12 @@
 			</nav>
 		</div>
 		<div id="content-continer">
-			<div id="Welcome" class="screen" align="center">
+			<div id="Welcome" class="screen" align="center" style="padding-bottom: 25px;">
 				<div>
-					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Register')" style="margin: 50px auto; padding: 40px;">Random Settings</button>
+					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Register')" style="margin: 50px auto; padding: 30px;">Register</button>
 				</div>
 				<div>
-					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Login-screen')" style=" margin: 50px auto; padding: 30px;">Random Settings</button>
+					<button class="welcome-btn" type="button" id="btnRandomSettings" onclick="switchScreen('Login-screen')" style=" margin: 50px auto; padding: 30px;">Log-In</button>
 				</div>
 			</div>
 			<br>
@@ -131,7 +133,7 @@
 							<label id="l2" for="lblTime">TIME:</label>
 							<input id="lblTime" type="text" />
 						</div>
-						<canvas id="canvas" height="600" width="600" style="background-color: rgb(6, 7, 7);"></canvas>
+						<canvas id="canvas" width="800" height="600" style="background-color: white;"></canvas>
 					</div>	
 				</div>
 			</div>
@@ -140,20 +142,23 @@
 			<div id="Register" class="screen">
 				<br>
 				<br>
-				<form id="register-form">
-					<input type="text" id="reg-name" placeholder="User Name" required>
-					<input type="password" id="reg-pass" placeholder="Password" required>
-					<input type="email" id="reg-email" placeholder="E-mail" required>
-					<input type="text" id="reg-fullname" placeholder="Full Name" required>
-					<button type="submit" id="reg-btn" onclick="getInfo()">Register</button>
+				<form id="reg-form">
+					<input type="text" id="reg-name" placeholder="User Name" name="username" required>
+					<input type="password" id="reg-pass" placeholder="Password" name="password" required>
+					<input type="email" id="reg-email" placeholder="E-mail" name="email" required>
+					<input type="text" id="reg-fullname" placeholder="Full Name" name="fullname" required>
+					<input type="date" id="birth-date" name="reg-birth-date" value="2000-01-01" min="1900-01-01" max="2022-01-01" required>
+					<button type="submit" id="reg-btn" onclick="register()">Register</button>
 				</form>
 			</div>
-			<div id="Login-screen" class="screen">
+			<div id="Login-screen" class="screen" style="padding-bottom: 30px;">
 				<br>
 				<br>
 				<form id="login-form">
 					<input type="text" id="login-username" placeholder="User Name" required>
 					<input type="password" id="login-pass" placeholder="Password" required>
+					<b><a class="one" onclick="switchScreen('Register')" target="_blank">Dont have a user? Go to register</a></b>
+					<br>
 					<button type="button" id="login-btn" onclick="getInfo()">Log In</button>
 				</form>
 			</div>
@@ -174,6 +179,77 @@
 			</div> -->
 		</div>
 
+		<!--FOOTER-->
+		<div id="div-footer" class="footer" style="position: relative;">
+			<footer id="footer-cotainer" >
+				<div id="footer-left" class="footer-content">
+					<h6>About</h6>
+					<br>
+					<p>A Pacman game we made in Web Course.</p>
+					<p> We used Javascript, Jquery, HTML and CSS.</p>
+				</div>
+				<div id="shahar">
+					<h4 id="names-ben"> Shahar Kramer</h4>
+					<ul class="social-links">
+						<li>
+							<a href="mailto:kramers@post.bgu.ac.il">
+								<img class="contact-logo" src="images/mail.png">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/">
+								<img class="contact-logo" id="linkein-logo-ben" src="images/in.png" >
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/shaharkr">
+								<img class="contact-logo" id="github-logo-ben" src="images/github.png">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.facebook.com/aoostkr/">
+								<img class="contact-logo" id="facebook-logo-ben" src="images/facebook.png">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="uri">
+					<h4 id="names-mor"> Uri Zlotkin</h4>
+					<ul class="social-links">
+						<li>
+							<a href="mailto:urizlo@post.bgu.ac.il">
+								<img class="contact-logo" src="images/mail.png">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/in/mor-saranga/">
+								<img class="contact-logo" id="linkein-logo-mor" src="images/in.png">
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/urizlotkin">
+								<img class="contact-logo" id="github-logo-mor" src="images/github.png">
+							</a>
+						</li>	
+						<li>
+							<a href="https://www.facebook.com/uri.zlotkin">
+								<img class="contact-logo" id="facebook-logo-mor" src="images/facebook.png">
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- <div id="footer-right" class="footer-content">
+					<h6>The Creators</h6>
+					<br>
+					<br>
+					
+					<br>
+					
+				</div> -->
+			</footer>
+		</div>
+
 
 		
 		<!-- link to js -->
@@ -182,8 +258,11 @@
 		<script type="text/javascript" src="./jsFiles/menu.js"></script>
 		<script type="text/javascript" src="./jsFiles/login.js"></script>
 		<script type="text/javascript" src="./jsFiles/settings.js"></script>
+		<script type="text/javascript" src="./jsFiles/register.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="jsFiles/jquery.validate.min.js"></script>
+		<script scr="jsFiles/signup-form.js"></script>
 
 		
 	</body>
