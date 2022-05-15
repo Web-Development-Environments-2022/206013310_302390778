@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	localStorage.setItem('k', 'k');
     //check if username already exists
-	$.validator.addMethod('fineUserName', function (value, element) {
+	jQuery.validator.addMethod("validateUsername", function (value, element) {
 		is_valid = localStorage.getItem(value);
 		is_item = localStorage[value];
 		if(is_item==null)
@@ -9,7 +9,7 @@ $(document).ready(function(){
 		else return false;
 	});
 
-	$.validator.addMethod('strongPassword', function(value, element) {
+	jQuery.validator.addMethod("strongPassword", function(value, element) {
 		if(value.length<6 || !(/[a-zA-Z]/g).test(value) || !(/\d/.test(value)) ){
             return false;
         }
@@ -19,8 +19,8 @@ $(document).ready(function(){
 	
 
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
-	},); 
+		return this.optional(element) || /^[a-z]+$/i.test(value);
+	  },); 
 
 // 	jQuery.validator.addMethod("fullname", function(value, element) {
 //   	if (/^[a-z][- a-z]*[- ]{2}[- a-z]*[a-z]$/i.test(value))
@@ -38,7 +38,7 @@ $(document).ready(function(){
 // });
 	
 	//REGISTER
-	$("#register-form").validate({
+	$("#reg-form").validate({
 		rules: {
 			username: {
 				required: true,
@@ -46,7 +46,6 @@ $(document).ready(function(){
 			},
 			password: {
 				required: true,
-				//minlength: 6,
 				strongPassword: true
 			},
 			fullname: {
@@ -97,5 +96,5 @@ function register() {
 	let username = document.getElementById("reg-name").value;
 	let password = document.getElementById("reg-pass").value;
     objPeople[username] = password;
-    switchScreen('Login-screen');
+    //switchScreen('Login-screen');
 };
