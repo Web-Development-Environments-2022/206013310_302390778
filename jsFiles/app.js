@@ -325,195 +325,8 @@ function movePossible(ghostShape){
 }
 
 //------------------------------------------------------------------goust func
-<<<<<<< HEAD
-function ghostUpdatePositionTemp(){
-	var direction;
-=======
-function ghostUpdatePosition(ghostShape){
-	if (ghostShape.i > shape.i && ghostShape.j > shape.j)// pacman left and up to ghost
-	{
-		var direction = Math.floor(Math.random() * 2 + 1);
-		if (direction == 1)// left
-		{
-			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
-				ghostShape.i--;
-				return;
-			}
-		}
-		if (direction == 2) { // up
-			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
-				ghostShape.j--;
-				return;
-			}
-		}
-		movePossible(ghostShape);
-	}
-	if (ghostShape.i <= shape.i && ghostShape.j > shape.j)// pacman right and up to ghost
-	{
-		var direction = Math.floor(Math.random() * 2 + 1);
-		if (direction == 1) { // right
-			if (ghostShape.i < 19 && board[ghostShape.i + 1][ghostShape.j] != 4) {
-				ghostShape.i++;
-				return;
-			}
-		}
-		if (direction == 2) { // up
-			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
-				ghostShape.j--;
-				return;
-			}
-		}
-		movePossible(ghostShape);
-	}
-	if (ghostShape.i > shape.i && ghostShape.j <= shape.j)// pacman left and down to ghost
-	{
-		var direction = Math.floor(Math.random() * 2 + 1);
-		if (direction == 1) { // left
-			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
-				ghostShape.i--;
-				return;
-			}
-		}
-		if (direction == 2) { // down
-			if (ghostShape.j < 19 && board[ghostShape.i][ghostShape.j + 1] != 4) {
-				ghostShape.j++;
-				return;
-			}
-		}
-		movePossible(ghostShape);
-	}
-	if (ghostShape.i <= shape.i && ghostShape.j <= shape.j)// pacman right and down to ghost
-	{
-		var direction = Math.floor(Math.random() * 2 + 1);
-		if (direction == 1) { // right
-			if (ghostShape.i < 19 && board[ghostShape.i + 1][ghostShape.j] != 4) {
-				ghostShape.i++;
-				return;
-			}
-		}	
-		if (direction == 2) { // down
-			if (ghostShape.j < 19 && board[ghostShape.i][ghostShape.j + 1] != 4) {
-				ghostShape.j++;
-				return;
-			}
-		}
-		movePossible(ghostShape);
-	}
-	Draw();
-}
 //-----------------------------------------------------------------
 
-function movePossible(ghostShape){
->>>>>>> 038ac4692f6f8835fc555f09b22e3dec5f18c0fb
-	while (true){
-		direction = Math.floor(Math.random() * 4 + 1);
-		if (direction == 1) { // up
-			if (ghostShape1.j > 0 && board[ghostShape1.i][ghostShape1.j - 1] != 4) {
-				ghostShape1.j--;
-				break;
-			}
-		}
-		if (direction == 2) { // down
-			if (ghostShape1.j < number_of_cols-1 && board[ghostShape1.i][ghostShape1.j + 1] != 4) {
-				ghostShape1.j++;
-				break;
-			}
-		}
-		if (direction == 3) { // left
-			if (ghostShape1.i > 0 && board[ghostShape1.i - 1][ghostShape1.j] != 4) {
-				ghostShape1.i--;
-				break;
-			}
-		}
-		if (direction == 4) { // right
-			if (ghostShape1.i < number_of_rows-1 && board[ghostShape1.i + 1][ghostShape1.j] != 4) {
-				ghostShape1.i++;
-				break;
-			}
-		}	
-	}
-	while (num_of_ghosts > 1){
-		direction = Math.floor(Math.random() * 4 + 1);
-		if (direction == 1) { // up
-			if (ghostShape2.j > 0 && board[ghostShape2.i][ghostShape2.j - 1] != 4) {
-				ghostShape2.j--;
-				break;
-			}
-		}
-		if (direction == 2) { // down
-			if (ghostShape2.j < number_of_cols-1 && board[ghostShape2.i][ghostShape2.j + 1] != 4) {
-				ghostShape2.j++;
-				break;
-			}
-		}
-		if (direction == 3) { // left
-			if (ghostShape2.i > 0 && board[ghostShape2.i - 1][ghostShape2.j] != 4) {
-				ghostShape2.i--;
-				break;
-			}
-		}
-		if (direction == 4) { // right
-			if (ghostShape2.i < number_of_rows-1 && board[ghostShape2.i + 1][ghostShape2.j] != 4) {
-				ghostShape2.i++;
-				break;
-			}
-		}	
-	}
-	while (num_of_ghosts > 2){
-		direction = Math.floor(Math.random() * 4 + 1);
-		if (direction == 1) { // up
-			if (ghostShape3.j > 0 && board[ghostShape3.i][ghostShape3.j - 1] != 4) {
-				ghostShape3.j--;
-				break;
-			}
-		}
-		if (direction == 2) { // down
-			if (ghostShape3.j < number_of_cols-1 && board[ghostShape3.i][ghostShape3.j + 1] != 4) {
-				ghostShape3.j++;
-				break;
-			}
-		}
-		if (direction == 3) { // left
-			if (ghostShape3.i > 0 && board[ghostShape3.i - 1][ghostShape3.j] != 4) {
-				ghostShape3.i--;
-				break;
-			}
-		}
-		if (direction == 4) { // right
-			if (ghostShape3.i < number_of_rows-1 && board[ghostShape3.i + 1][ghostShape3.j] != 4) {
-				ghostShape3.i++;
-				break;
-			}
-		}	
-	}
-	while (num_of_ghosts > 3){
-		direction = Math.floor(Math.random() * 4 + 1);
-		if (direction == 1) { // up
-			if (ghostShape4.j > 0 && board[ghostShape4.i][ghostShape4.j - 1] != 4) {
-				ghostShape4.j--;
-				break;
-			}
-		}
-		if (direction == 2) { // down
-			if (ghostShape4.j < number_of_cols-1 && board[ghostShape4.i][ghostShape4.j + 1] != 4) {
-				ghostShape4.j++;
-				break;
-			}
-		}
-		if (direction == 3) { // left
-			if (ghostShape4.i > 0 && board[ghostShape4.i - 1][ghostShape4.j] != 4) {
-				ghostShape4.i--;
-				break;
-			}
-		}
-		if (direction == 4) { // right
-			if (ghostShape4.i < number_of_rows-1 && board[ghostShape4.i + 1][ghostShape4.j] != 4) {
-				ghostShape4.i++;
-				break;
-			}
-		}	
-	}
-}
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() *(number_of_cols-1) + 1);
@@ -653,9 +466,7 @@ function UpdatePosition() {
 		candyShape.j = -1;
 		window.clearInterval(intervalCandy);
 	}
-
 	board[shape.i][shape.j] = 2;
-	
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if(game_long - time_elapsed <= 0.05){
@@ -670,9 +481,9 @@ function UpdatePosition() {
 		window.clearInterval(intervalGhosts);
 		switchScreen("settings");
 	}
-	if (score >=100) {
-		// wall_img.src = "./images/wall.png"; // 
-	}
+	// if (score >=100) {
+	// 	// wall_img.src = "./images/wall.png"; // 
+	// }
 	else {
 		Draw();
 	}
