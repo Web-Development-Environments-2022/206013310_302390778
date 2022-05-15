@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	localStorage.setItem('k', 'k');
+	console.log(localStorage)
     //check if username already exists
 	jQuery.validator.addMethod("validateUsername", function (value, element) {
 		is_valid = localStorage.getItem(value);
@@ -83,18 +84,19 @@ $(document).ready(function(){
 		}
 		,submitHandler: function (){
 			register();
-			switchScreens(`Login-screen`);
 			//reset form details
-			let form = $("#register-form");
+			let form = $("#reg-form");
 			form[0].reset();
+			switchScreens(`Login-screen`);
 		}
 	});	
 });
 
 
 function register() {
+	console.log(localStorage)
 	let username = document.getElementById("reg-name").value;
 	let password = document.getElementById("reg-pass").value;
-    objPeople[username] = password;
+    localStorage.setItem(username,password)
     //switchScreen('Login-screen');
 };
