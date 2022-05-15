@@ -27,17 +27,17 @@ function updateKeyborads(direction){
             document.getElementById("buttonDown").value = chosen_key_down;
             chosen_keys['down'] = chosen_key_code_down;
             break;
-        case "LEFT":
-            chosen_key_left=  DisplaychosenKey(key_pressed);
-            chosen_key_code_left = key_pressed;
-            document.getElementById("buttonLeft").value = chosen_key_left;
-            chosen_keys['left'] = chosen_key_code_left;
-            break;
         case "RIGHT":
             chosen_key_right=  DisplaychosenKey(key_pressed);
             chosen_key_code_right = key_pressed;
             document.getElementById("buttonRight").value = chosen_key_right;
             chosen_keys['right'] = chosen_key_code_right;
+            break;
+        case "LEFT":
+            chosen_key_left=  DisplaychosenKey(key_pressed);
+            chosen_key_code_left = key_pressed;
+            document.getElementById("buttonLeft").value = chosen_key_left;
+            chosen_keys['left'] = chosen_key_code_left;
             break;
     }
     $(document).unbind();

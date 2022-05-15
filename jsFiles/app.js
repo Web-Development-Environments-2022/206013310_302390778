@@ -325,8 +325,86 @@ function movePossible(ghostShape){
 }
 
 //------------------------------------------------------------------goust func
+<<<<<<< HEAD
 function ghostUpdatePositionTemp(){
 	var direction;
+=======
+function ghostUpdatePosition(ghostShape){
+	if (ghostShape.i > shape.i && ghostShape.j > shape.j)// pacman left and up to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1)// left
+		{
+			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
+				ghostShape.i--;
+				return;
+			}
+		}
+		if (direction == 2) { // up
+			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
+				ghostShape.j--;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i <= shape.i && ghostShape.j > shape.j)// pacman right and up to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // right
+			if (ghostShape.i < 19 && board[ghostShape.i + 1][ghostShape.j] != 4) {
+				ghostShape.i++;
+				return;
+			}
+		}
+		if (direction == 2) { // up
+			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
+				ghostShape.j--;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i > shape.i && ghostShape.j <= shape.j)// pacman left and down to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // left
+			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
+				ghostShape.i--;
+				return;
+			}
+		}
+		if (direction == 2) { // down
+			if (ghostShape.j < 19 && board[ghostShape.i][ghostShape.j + 1] != 4) {
+				ghostShape.j++;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i <= shape.i && ghostShape.j <= shape.j)// pacman right and down to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // right
+			if (ghostShape.i < 19 && board[ghostShape.i + 1][ghostShape.j] != 4) {
+				ghostShape.i++;
+				return;
+			}
+		}	
+		if (direction == 2) { // down
+			if (ghostShape.j < 19 && board[ghostShape.i][ghostShape.j + 1] != 4) {
+				ghostShape.j++;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	Draw();
+}
+//-----------------------------------------------------------------
+
+function movePossible(ghostShape){
+>>>>>>> 038ac4692f6f8835fc555f09b22e3dec5f18c0fb
 	while (true){
 		direction = Math.floor(Math.random() * 4 + 1);
 		if (direction == 1) { // up
@@ -436,8 +514,6 @@ function ghostUpdatePositionTemp(){
 		}	
 	}
 }
-//-----------------------------------------------------------------
-
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() *(number_of_cols-1) + 1);
