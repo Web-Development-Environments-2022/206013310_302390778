@@ -9,6 +9,7 @@ var score;
 var start_time;
 var time_elapsed;
 var interval;
+var life = 5;
 
 var num_of_basic_food;
 var num_of_special_food; 
@@ -166,8 +167,14 @@ function Start() {
 	candyShape.i = candy_place[0];
 	candyShape.j = candy_place[1];
 	intervalCandy = setInterval(candyUpdatePoisition,5000);
-	interval = setInterval(UpdatePosition, 50);
+	interval = setInterval(UpdatePosition, 120);
 	//---------------------------------------------------------------gousts code
+	startGhostPositions()
+	intervalGhosts = setInterval(ghostUpdatePosition,999)
+	//----------------------------------------------------------------------------
+}
+
+function startGhostPositions(){
 	ghostShape1.i = 0
 	ghostShape1.j = 0
 	ghostShape2.i = - 1
@@ -198,20 +205,74 @@ function Start() {
 			ghostShape4.j = number_of_rows - 1
 		}
 	}
+}
+
+function collision(){
+	life--;
+	if (life == 1){
+		document.getElementById("heart2").style.display="none"
+	}
+	if (life == 2){
+		document.getElementById("heart3").style.display="none"
+	}
+	if (life == 3){
+		document.getElementById("heart4").style.display="none"
+	}
+	if (life == 4){
+		document.getElementById("heart5").style.display="none"
+	}
+	
+	window.clearInterval(intervalGhosts)
+	window.clearInterval(interval)
+	board[shape.i][shape.j] = 0
+	board[ghostShape1.i][ghostShape1.j] = 0
+	if (num_of_ghosts > 1){
+		board[ghostShape2.i][ghostShape2.j] = 0
+	}
+	if (num_of_ghosts > 2){
+		board[ghostShape3.i][ghostShape3.j] = 0
+	}
+	if (num_of_ghosts > 3){
+		board[ghostShape4.i][ghostShape4.j] = 0
+	}
+	startGhostPositions()
+	var pac_place = findRandomEmptyCell(board);
+	shape.i = pac_place[0];
+	shape.j = pac_place[1];
 	intervalGhosts = setInterval(ghostUpdatePosition,999)
-	//----------------------------------------------------------------------------
+	interval = setInterval(UpdatePosition,120)
+	Draw();	
 }
 
 function ghostUpdatePosition(){
 	ghostMove(ghostShape1)
-	if (num_of_ghosts > 1){
-		ghostMove(ghostShape2)	
+	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
+		collision()
 	}
+	if (num_of_ghosts > 1){
+		ghostMove(ghostShape2)
+		if (ghostShape2.i == shape.i && ghostShape2.j == shape.j){
+			collision()
+	}
+}
 	if (num_of_ghosts > 2){
 		ghostMove(ghostShape3)
+		if (ghostShape3.i == shape.i && ghostShape3.j == shape.j){
+			collision()	
 	}
+}
 	if (num_of_ghosts > 3){
-		ghostMove(ghostShape4)	
+		ghostMove(ghostShape4)
+		if (ghostShape4.i == shape.i && ghostShape4.j == shape.j){
+			collision()
+	}
+}
+	if(life == 0){
+		window.alert("You are better than ".concat(score.toString(), " points!"));
+		window.clearInterval(interval);
+		window.clearInterval(intervalCandy);
+		window.clearInterval(intervalGhosts);
+		switchScreen("settings");
 	}
 }
 
@@ -353,59 +414,6 @@ function GetKeyPressed() {
 	}
 }
 
-function Draw() {
-	canvas.width = canvas.width; //clean board
-	lblScore.value = score;
-	lblTime.value = time_elapsed;
-	for (var i = 0; i < number_of_cols; i++) {
-		for (var j = 0; j < number_of_rows; j++) {
-			var center = new Object();
-			center.x = i * 30 + 30;
-			center.y = j * 30 + 30;
-			if (i == ghostShape1.i && j == ghostShape1.j){
-				context.drawImage(g1_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
-			}
-			if (i == ghostShape2.i && j == ghostShape2.j){
-				context.drawImage(g2_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
-			}
-			if (i == ghostShape3.i && j == ghostShape3.j){
-				context.drawImage(g3_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
-			}
-			if (i == ghostShape4.i && j == ghostShape4.j){
-				context.drawImage(g4_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
-			}
-			//----------------------------------------------------------------------------- 
-			if (board[i][j] == 2) {
-				context.drawImage(pac_img,center.x-10, center.y-10, 0.7*cell_width, 0.7*cell_height);
-				
-			}
-			 else if (board[i][j] == 4) {
-				context.drawImage(wall_img,center.x-15, center.y-15, cell_width, cell_height);
-			}
-			else if (board[i][j] == BOARD_NUMBER_BASIC && !checkIfPositionHasGhost(i,j)) {
-				context.beginPath();
-				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
-				context.fillStyle = basic_food_color; //color
-				context.fill();
-			}
-			else if (board[i][j] == BOARD_NUMBER_SPECIAL && !checkIfPositionHasGhost(i,j)) {
-				context.beginPath();
-				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
-				context.fillStyle = special_food_color; //color
-				context.fill();
-			}
-			else if (board[i][j] == BOARD_NUMBER_GOURMET && !checkIfPositionHasGhost(i,j)) {
-				context.beginPath();
-				context.arc(center.x, center.y, 8, 0, 2 * Math.PI); // circle
-				context.fillStyle = gourmet_food_color; //color
-				context.fill();
-			}
-			else if (candyShape.i == i && candyShape.j == j  && !checkIfPositionHasGhost(i,j)){
-				context.drawImage(candy_img,center.x-15, center.y-15, cell_width, cell_height);
-			}
-		}
-	}
-}
 function checkIfPositionHasGhost(i,j){
 	if(i == ghostShape1.i && j == ghostShape1.j){
 		return true;
@@ -466,6 +474,25 @@ function UpdatePosition() {
 		candyShape.j = -1;
 		window.clearInterval(intervalCandy);
 	}
+	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
+		collision()
+	}
+	if (ghostShape2.i == shape.i && ghostShape2.j == shape.j){
+		collision()
+	}
+	if (ghostShape3.i == shape.i && ghostShape3.j == shape.j){
+		collision()	
+	}
+	if (ghostShape4.i == shape.i && ghostShape4.j == shape.j){
+		collision()
+	}
+	if(life == 0){
+		window.alert("You are better than ".concat(score.toString(), " points!"));
+		window.clearInterval(interval);
+		window.clearInterval(intervalCandy);
+		window.clearInterval(intervalGhosts);
+		switchScreen("settings");
+	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
@@ -481,6 +508,7 @@ function UpdatePosition() {
 		window.clearInterval(intervalGhosts);
 		switchScreen("settings");
 	}
+
 	// if (score >=100) {
 	// 	// wall_img.src = "./images/wall.png"; // 
 	// }
@@ -493,4 +521,58 @@ function candyUpdatePoisition(){
 	var place = findRandomEmptyCell(board)
 	candyShape.i = place[0];
 	candyShape.j = place[1];
+}
+
+function Draw() {
+	canvas.width = canvas.width; //clean board
+	lblScore.value = score;
+	lblTime.value = time_elapsed;
+	for (var i = 0; i < number_of_cols; i++) {
+		for (var j = 0; j < number_of_rows; j++) {
+			var center = new Object();
+			center.x = i * 30 + 30;
+			center.y = j * 30 + 30;
+			if (i == ghostShape1.i && j == ghostShape1.j){
+				context.drawImage(g1_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+			}
+			if (i == ghostShape2.i && j == ghostShape2.j){
+				context.drawImage(g2_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+			}
+			if (i == ghostShape3.i && j == ghostShape3.j){
+				context.drawImage(g3_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+			}
+			if (i == ghostShape4.i && j == ghostShape4.j){
+				context.drawImage(g4_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+			}
+			//----------------------------------------------------------------------------- 
+			if (board[i][j] == 2) {
+				context.drawImage(pac_img,center.x-10, center.y-10, 0.7*cell_width, 0.7*cell_height);
+				
+			}
+			 else if (board[i][j] == 4) {
+				context.drawImage(wall_img,center.x-15, center.y-15, cell_width, cell_height);
+			}
+			else if (board[i][j] == BOARD_NUMBER_BASIC && !checkIfPositionHasGhost(i,j)) {
+				context.beginPath();
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
+				context.fillStyle = basic_food_color; //color
+				context.fill();
+			}
+			else if (board[i][j] == BOARD_NUMBER_SPECIAL && !checkIfPositionHasGhost(i,j)) {
+				context.beginPath();
+				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
+				context.fillStyle = special_food_color; //color
+				context.fill();
+			}
+			else if (board[i][j] == BOARD_NUMBER_GOURMET && !checkIfPositionHasGhost(i,j)) {
+				context.beginPath();
+				context.arc(center.x, center.y, 8, 0, 2 * Math.PI); // circle
+				context.fillStyle = gourmet_food_color; //color
+				context.fill();
+			}
+			else if (candyShape.i == i && candyShape.j == j  && !checkIfPositionHasGhost(i,j)){
+				context.drawImage(candy_img,center.x-15, center.y-15, cell_width, cell_height);
+			}
+		}
+	}
 }

@@ -127,6 +127,12 @@ nav {
 a:hover{
 	opacity: 1;
 }
+
+#heart {
+    content: "\2764";
+	size: 36px;
+	color: "red";
+}
 /* main { 
     display: flex;
     justify-content: space-evenly;
