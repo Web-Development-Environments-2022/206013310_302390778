@@ -210,16 +210,16 @@ function startGhostPositions(){
 function collision(){
 	life--;
 	if (life == 1){
-		document.getElementById("heart2").style.display="none"
+		document.getElementById("heart2").style.visibility="hidden"
 	}
 	if (life == 2){
-		document.getElementById("heart3").style.display="none"
+		document.getElementById("heart3").style.visibility="hidden"
 	}
 	if (life == 3){
-		document.getElementById("heart4").style.display="none"
+		document.getElementById("heart4").style.visibility="hidden"
 	}
 	if (life == 4){
-		document.getElementById("heart5").style.display="none"
+		document.getElementById("heart5").style.visibility="hidden"
 	}
 	
 	window.clearInterval(intervalGhosts)
