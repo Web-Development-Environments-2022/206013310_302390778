@@ -95,6 +95,5 @@ $(document).ready(function(){
 function register() {
 	let username = document.getElementById("reg-name").value;
 	let password = document.getElementById("reg-pass").value;
-    localStorage.setItem(username,password)
-    //switchScreen('Login-screen');
+    localStorage.setItem(username,password);
 };
