@@ -1,7 +1,7 @@
 var context;
 var board;
-var number_of_cols = 28;
-var number_of_rows = 17;
+var number_of_cols = 26;
+var number_of_rows = 18;
 var cell_width = document.getElementById("canvas").width/number_of_cols;
 var cell_height =document.getElementById("canvas").height/number_of_rows;
 
@@ -51,33 +51,56 @@ function Start() {
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
 	g4_img.src = "./images/g4.png";
-	ghostShape1.i = 0
-	ghostShape1.j = 0
-	ghostShape2.i = number_of_rows - 1
-	ghostShape2.j = 0
-	ghostShape3.i = 0
-	ghostShape3.j = number_of_cols - 1
-	ghostShape4.i = number_of_rows - 1
-	ghostShape4.j = number_of_cols - 1
+	
+	// board = [
+	// 	[4,4,4,4,4,4,0,0,0,4,4,4,4,4,4,4,4,4,0,4,4,4,4,4,4,4,0,4],
+	// 	[0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+	// 	[0,0,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
+	// 	[0,0,4,0,0,4,0,0,0,4,0,0,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
+	// 	[4,0,4,4,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
+	// 	[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+	// 	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
+	// 	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
+	// 	[0,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,0,0,4],
+	// 	[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,4,4],
+	// 	[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,0,0,0,0,0,4],
+	// 	[0,0,4,4,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4,4,0,4,0,4,4,0,4],
+	// 	[4,0,0,0,0,4,0,4,4,0,4,4,4,0,0,4,4,4,0,4,4,0,4,0,0,4,0,0],
+	// 	[4,4,4,4,4,4,0,4,4,0,4,0,0,0,0,0,0,4,0,4,4,0,4,4,4,4,4,0],
+	// 	[0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,4,0,4,0,0,0,0,0,0,0,0,0,4],
+	// 	[0,0,4,0,4,4,0,4,4,0,4,0,0,0,0,4,0,4,0,4,4,0,4,4,4,4,0,4],
+	// 	[4,4,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4]	
+	// 	]
 	board = [
-		[4,4,4,4,4,4,0,0,0,4,4,4,4,4,4,4,4,4,0,4,4,4,4,4,4,4,0,4],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4],
-		[0,0,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-		[0,0,4,0,0,4,0,0,0,4,0,0,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-		[4,0,4,4,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-		[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-		[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
-		[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
-		[0,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,0,0,4],
-		[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,4,4],
-		[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,0,0,0,0,0,4],
-		[0,0,4,4,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4,4,0,4,0,4,4,0,4],
-		[4,0,0,0,0,4,0,4,4,0,4,4,4,0,0,4,4,4,0,4,4,0,4,0,0,4,0,0],
-		[4,4,4,4,4,4,0,4,4,0,4,0,0,0,0,0,0,4,0,4,4,0,4,4,4,4,4,0],
-		[0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,4,0,4,0,0,0,0,0,0,0,0,0,4],
-		[0,0,4,0,4,4,0,4,4,0,4,0,0,0,0,4,0,4,0,4,4,0,4,4,4,4,0,4],
-		[4,4,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4]	
-		]
+		[0,0,0,0,4,4,4,4,0,4,4,0,4,4,0,0,0,0],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0],
+		[4,0,4,4,4,0,4,4,0,4,4,4,0,4,0,4,4,0],
+		[4,0,0,0,4,0,4,4,0,0,0,4,0,4,0,0,4,0],
+		[4,0,4,0,4,0,4,4,0,4,4,4,4,4,0,4,4,0],
+		[4,0,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,4,0,4,0,4,4,4,4,4,4,4,4,0,4,4,4],
+		[0,0,4,0,4,0,4,4,4,4,4,4,4,4,0,4,4,4],
+		[4,0,4,4,4,0,0,0,0,4,4,0,0,0,0,0,0,0],
+		[4,0,4,0,4,0,4,4,0,4,4,0,4,4,4,4,4,0],
+		[4,0,4,0,4,0,4,4,0,4,4,0,4,0,4,0,4,0],
+		[4,0,0,0,0,0,4,4,0,0,0,0,4,0,4,0,4,0],
+		[4,4,4,4,4,0,4,4,4,4,4,0,0,0,4,0,4,0],
+		[4,4,4,4,4,0,4,4,4,4,4,0,0,0,0,0,0,0],
+		[4,0,0,0,0,0,4,4,0,0,0,0,4,0,4,4,4,0],
+		[4,0,4,4,4,0,4,4,0,4,4,0,4,0,0,0,4,0],
+		[4,0,4,4,4,0,4,4,0,4,4,0,4,4,4,4,4,4],
+		[0,0,4,4,4,0,0,0,0,4,4,0,0,0,0,0,0,4],
+		[4,0,4,4,4,0,4,4,4,4,4,4,4,4,0,4,0,4],
+		[4,0,4,4,4,0,4,4,4,4,4,4,4,4,0,4,4,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[4,0,4,4,4,0,4,4,0,4,0,4,4,4,0,4,4,0],
+		[4,0,4,4,4,0,4,4,0,4,0,0,0,4,0,4,0,0],
+		[4,0,4,4,4,0,4,4,0,4,0,4,0,4,0,4,4,0],
+		[0,0,4,4,0,0,4,4,0,4,0,4,4,4,0,0,0,0]
+		// [4,0,4,4,0,0,4,4,0,4,0,4,4,4,4,4,4,4]
+	]
+	
 	score = 0;
 	var cnt = 200;
 	var food_remain = number_of_food;
@@ -143,29 +166,166 @@ function Start() {
 	candyShape.i = candy_place[0];
 	candyShape.j = candy_place[1];
 	intervalCandy = setInterval(candyUpdatePoisition,5000);
-	interval = setInterval(UpdatePosition, 137);
+	interval = setInterval(UpdatePosition, 50);
 	//---------------------------------------------------------------gousts code
+	ghostShape1.i = 0
+	ghostShape1.j = 0
+	ghostShape2.i = - 1
+	ghostShape2.j = -1
+	ghostShape3.i = -1
+	ghostShape3.j = - 1
+	ghostShape4.i = - 1
+	ghostShape4.j = - 1
 	for(i=0;i<num_of_ghosts;i++){
 		if (i == 0){
 			board[0][0] = 0
+			ghostShape1.i = 0
+			ghostShape1.j = 0
 		}
 		if (i == 1){
 			board[number_of_rows - 1][0] = 0
+			ghostShape2.i = number_of_cols - 1
+			ghostShape2.j = 0
 		}
 		if (i == 2){
 			board[0][number_of_cols - 1] = 0
+			ghostShape3.i = 0
+			ghostShape3.j = number_of_rows - 1
 		}
 		if (i == 3){
 			board[number_of_rows - 1][number_of_cols - 1] = 0
+			ghostShape4.i = number_of_cols - 1
+			ghostShape4.j = number_of_rows - 1
 		}
 	}
 	intervalGhosts = setInterval(ghostUpdatePosition,999)
 	//----------------------------------------------------------------------------
 }
 
+function ghostUpdatePosition(){
+	ghostMove(ghostShape1)
+	if (num_of_ghosts > 1){
+		ghostMove(ghostShape2)	
+	}
+	if (num_of_ghosts > 2){
+		ghostMove(ghostShape3)
+	}
+	if (num_of_ghosts > 3){
+		ghostMove(ghostShape4)	
+	}
+}
+
+function checkDirection(board,i,j){
+	posibileMoves = new Array();
+	index = 0;
+	if (i < number_of_cols - 1  && board[i + 1][j] != 4){//right
+		posibileMoves[index++] = 'right'
+	}
+	if (i > 0 && board[i - 1][j] != 4){//left
+		posibileMoves[index++] = 'left'
+	}
+	if (j > 0 && board[i][j-1] != 4){//up
+		posibileMoves[index++] = 'up'
+	}
+	if (j < number_of_rows - 1 && board[i][j+1] != 4){//down
+		posibileMoves[index++] = 'down'
+	}
+	// console.log(posibileMoves)
+	return posibileMoves;
+
+}
+
+function ghostMove(ghostShape){
+	if (ghostShape.i > shape.i && ghostShape.j > shape.j)// pacman left and up to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1)// left
+		{
+			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
+				ghostShape.i--;
+				return;
+			}
+		}
+		if (direction == 2) { // up
+			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
+				ghostShape.j--;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i <= shape.i && ghostShape.j > shape.j)// pacman right and up to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // right
+			if (ghostShape.i < number_of_cols - 1 && board[ghostShape.i + 1][ghostShape.j] != 4) {
+				ghostShape.i++;
+				return;
+			}
+		}
+		if (direction == 2) { // up
+			if (ghostShape.j > 0 && board[ghostShape.i][ghostShape.j - 1] != 4) {
+				ghostShape.j--;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i > shape.i && ghostShape.j <= shape.j)// pacman left and down to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // left
+			if (ghostShape.i > 0 && board[ghostShape.i - 1][ghostShape.j] != 4) {
+				ghostShape.i--;
+				return;
+			}
+		}
+		if (direction == 2) { // down
+			if (ghostShape.j < number_of_rows - 1 && board[ghostShape.i][ghostShape.j + 1] != 4) {
+				ghostShape.j++;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+	if (ghostShape.i <= shape.i && ghostShape.j <= shape.j)// pacman right and down to ghost
+	{
+		var direction = Math.floor(Math.random() * 2 + 1);
+		if (direction == 1) { // right
+			if (ghostShape.i < number_of_cols - 1 && board[ghostShape.i + 1][ghostShape.j] != 4) {
+				ghostShape.i++;
+				return;
+			}
+		}	
+		if (direction == 2) { // down
+			if (ghostShape.j <  number_of_rows - 1 && board[ghostShape.i][ghostShape.j + 1] != 4) {
+				ghostShape.j++;
+				return;
+			}
+		}
+		movePossible(ghostShape);
+	}
+}
+
+function movePossible(ghostShape){
+	posibileMoves = checkDirection(board,ghostShape.i,ghostShape.j);
+	var direction = Math.floor(Math.random() * posibileMoves.length);
+	if (posibileMoves[direction] == 'up') { // up
+		ghostShape.j--;		
+		}
+	if (posibileMoves[direction] == 'down') { // down
+			ghostShape.j++;	
+		}
+	if (posibileMoves[direction] == 'left') { // left
+			ghostShape.i--;
+		}
+	if (posibileMoves[direction] == 'right') { // right
+			ghostShape.i++;	
+		}
+}
 
 //------------------------------------------------------------------goust func
-function ghostUpdatePosition(){
+function ghostUpdatePositionTemp(){
 	var direction;
 	while (true){
 		direction = Math.floor(Math.random() * 4 + 1);
@@ -275,17 +435,16 @@ function ghostUpdatePosition(){
 			}
 		}	
 	}
-	Draw();
 }
 //-----------------------------------------------------------------
 
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() *(number_of_rows-1) + 1);
-	var j = Math.floor(Math.random() * (number_of_cols-1) + 1);
+	var i = Math.floor(Math.random() *(number_of_cols-1) + 1);
+	var j = Math.floor(Math.random() * (number_of_rows-1) + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * (number_of_rows-1) + 1);
-		j = Math.floor(Math.random() * (number_of_cols-1) + 1);
+		i = Math.floor(Math.random() * (number_of_cols-1) + 1);
+		j = Math.floor(Math.random() * (number_of_rows-1) + 1);
 	}
 	return [i, j];
 }
@@ -309,8 +468,8 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < number_of_rows; i++) {
-		for (var j = 0; j < number_of_cols; j++) {
+	for (var i = 0; i < number_of_cols; i++) {
+		for (var j = 0; j < number_of_rows; j++) {
 			var center = new Object();
 			center.x = i * 30 + 30;
 			center.y = j * 30 + 30;
@@ -386,7 +545,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 19 && board[shape.i][shape.j + 1] != 4) { // Down
+		if (shape.j < number_of_rows-1 && board[shape.i][shape.j + 1] != 4) { // Down
 			shape.j++;
 			pac_img.src = "./images/pacD.png";
 		}
@@ -398,7 +557,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 19 && board[shape.i + 1][shape.j] != 4) { // Right
+		if (shape.i < number_of_cols-1 && board[shape.i + 1][shape.j] != 4) { // Right
 			shape.i++;
 			pac_img.src = "./images/pacR.png";
 		}
@@ -447,5 +606,4 @@ function candyUpdatePoisition(){
 	var place = findRandomEmptyCell(board)
 	candyShape.i = place[0];
 	candyShape.j = place[1];
-	Draw();
 }

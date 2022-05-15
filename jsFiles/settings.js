@@ -69,6 +69,34 @@ timeSlider.oninput = function() {
   output2.innerHTML = this.value;
 }
 
+
+function setRandomSettings(){
+    var rand_basic_food_color = Math.floor(Math.random()*16777215).toString(16);
+    var rand_special_food_color = Math.floor(Math.random()*16777215).toString(16);
+    var rand_gourmet_food_color = Math.floor(Math.random()*16777215).toString(16);
+    var rand_game_long = Math.floor(Math.random() * 120) + 60
+    var rand_food_amount = Math.floor(Math.random() * 40) + 50
+    document.getElementById("timeRange").value = rand_game_long;
+    document.getElementById("timeValue").innerHTML = rand_game_long;
+    document.getElementById("foodRange").value = rand_food_amount;
+    document.getElementById("foodValue").innerHTML = rand_food_amount;
+    while(rand_basic_food_color.length < 6){
+        rand_basic_food_color += '1'
+    }
+    while(rand_special_food_color.length < 6){
+        rand_special_food_color += '1'
+    }
+    while(rand_gourmet_food_color.length <6){
+        rand_gourmet_food_color += '1'
+    }
+    document.getElementById("basic").value = '#' + rand_basic_food_color;
+    document.getElementById("special").value = '#' + rand_special_food_color;
+    document.getElementById("gourmet").value = '#' + rand_gourmet_food_color;
+    
+}
+
+
+
 function startGame()
 {
     if (document.getElementById("oneG").checked == true){
@@ -91,3 +119,4 @@ function startGame()
     $("#game").show();
     Start();
 }
+

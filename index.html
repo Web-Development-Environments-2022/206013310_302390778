@@ -118,22 +118,24 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" id="btnRandomSettings" onclick="randomSettings()" >Random Settings</button>
+					<button type="button" id="btnRandomSettings" onclick="setRandomSettings()" >Random Settings</button>
 					<button type="button" id="btnStartGame" onclick="startGame()">Go</button>
 				</form>
 				<!-- <button type="button" id="btnRandomSettings" onclick="randomSettings()" >Random Settings</button>
 				<button type="button" id="btnStartGame" onclick="startGame()">Start Game</button> -->
 				<div id="game" class="screen" style="float: center; margin: 0px auto; padding: 40px;"> 
-					<div  align="center">
-						<div id="score">
-							<label id="l1" for="lblScore">SCORE:</label>
-							<input id="lblScore" type="text" />
+					<div  align="center" style="position: flex;">
+						<div id="game_details" style="float: left;">
+							<div id="score">
+								<label id="l1" for="lblScore">SCORE:</label>
+								<input id="lblScore" type="text" />
+							</div>
+							<div id="time">
+								<label id="l2" for="lblTime">TIME:</label>
+								<input id="lblTime" type="text" />
+							</div>
 						</div>
-						<div id="time">
-							<label id="l2" for="lblTime">TIME:</label>
-							<input id="lblTime" type="text" />
-						</div>
-						<canvas id="canvas" width="800" height="600" style="background-color: white;"></canvas>
+						<canvas id="canvas" width="810" height="580"  style="float: center; margin: 0px auto; background-color: white;"></canvas>
 					</div>	
 				</div>
 			</div>
