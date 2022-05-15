@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	localStorage.setItem('k', 'k');
-	console.log(localStorage)
     //check if username already exists
 	jQuery.validator.addMethod("validateUsername", function (value, element) {
 		is_valid = localStorage.getItem(value);
@@ -94,7 +93,6 @@ $(document).ready(function(){
 
 
 function register() {
-	console.log(localStorage)
 	let username = document.getElementById("reg-name").value;
 	let password = document.getElementById("reg-pass").value;
     localStorage.setItem(username,password)
