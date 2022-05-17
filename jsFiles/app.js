@@ -22,9 +22,13 @@ var BOARD_NUMBER_GOURMET = 6;
 var positionX;
 var positionY;
 
+var slowMotionTimmer = 0;
+var activateSlowMotion = false
+
 var shape = new Object();
 var candyShape = new Object();
 var extraTimeShape = new Object();
+var slowMotionShape = new Object();
 // goust params
 var ghostShape1 = new Object()
 var ghostShape2 = new Object()
@@ -38,7 +42,8 @@ var g2_img = new Image(10,10);
 var g3_img = new Image(10,10);
 var g4_img = new Image(10,10);
 var candy_img = new Image(10,10);
-extraTime_img = new Image(10,10);
+var extraTime_img = new Image(10,10);
+var slowMotion_img = new Image(10,10);
 var wall_img = new Image(10,10);
 
 var gameAudio
@@ -56,6 +61,7 @@ function Start() {
 	wall_img.src = "./images/blue_wall.png";
 	candy_img.src = "./images/candy.png";
 	extraTime_img.src = "./images/extra_time.png";
+	slowMotion_img.src = "./images/slow_motion.jpg"
 	g1_img.src = "./images/g1.png";
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
@@ -177,8 +183,12 @@ function Start() {
 	var extraTime_place = findRandomEmptyCell(board);
 	extraTimeShape.i = extraTime_place[0];
 	extraTimeShape.j = extraTime_place[1];
+	var slowMotion_place = findRandomEmptyCell(board);
+	slowMotionShape.i = slowMotion_place[0];
+	slowMotionShape.j = slowMotion_place[1];
 	intervalCandy = setInterval(candyUpdatePoisition,5000);
 	intervalExtraTime = setInterval(extraTimeUpdatePosition,5000);
+	intervalSlowMotion = setInterval(slowMotionUpdatePosition, 5000);
 	interval = setInterval(UpdatePosition, 120);
 	//---------------------------------------------------------------gousts code
 	startGhostPositions()
@@ -289,6 +299,7 @@ function ghostUpdatePosition(){
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		window.clearInterval(intervalExtraTime);
+		window.clearInterval(intervalSlowMotion);
 		switchScreen("settings");
 	}
 }
@@ -497,6 +508,17 @@ function UpdatePosition() {
 		extraTimeShape.j = -1;
 		window.clearInterval(intervalExtraTime);
 	}
+	if (slowMotionShape.i == shape.i && slowMotionShape.j == shape.j){
+		window.clearInterval(intervalGhosts);
+		intervalGhosts = setInterval(ghostUpdatePosition,3000);
+		slowMotionTimmer = time_elapsed + 15;
+		console.log(slowMotionTimmer)
+		console.log(time_elapsed)
+		slowMotionShape.i = -1;
+		slowMotionShape.j = -1;
+		window.clearInterval(intervalSlowMotion);
+		activateSlowMotion = true;
+	}
 	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
 		collision()
 	}
@@ -517,8 +539,16 @@ function UpdatePosition() {
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		window.clearInterval(intervalExtraTime);
+		window.clearInterval(intervalSlowMotion);
 		switchScreen("settings");
 		return 
+	}
+	if(slowMotionTimmer - time_elapsed <= 0.05 && activateSlowMotion){
+		console.log(slowMotionTimmer)
+		console.log(time_elapsed)
+		window.clearInterval(intervalGhosts);
+		intervalGhosts = setInterval(ghostUpdatePosition,1000);
+		activateSlowMotion = false;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
@@ -537,6 +567,7 @@ function UpdatePosition() {
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		window.clearInterval(intervalExtraTime);
+		window.clearInterval(intervalSlowMotion);
 		switchScreen("settings");
 		return 
 	}
@@ -559,6 +590,12 @@ function extraTimeUpdatePosition(){
 	var extraTime_place = findRandomEmptyCell(board)
 	extraTimeShape.i = extraTime_place[0];
 	extraTimeShape.j = extraTime_place[1];
+}
+
+function slowMotionUpdatePosition(){
+	var slowMotion_place = findRandomEmptyCell(board);
+	slowMotionShape.i = slowMotion_place[0];
+	slowMotionShape.j = slowMotion_place[1];
 }
 
 function Draw() {
@@ -613,6 +650,9 @@ function Draw() {
 			}
 			else if (extraTimeShape.i == i && extraTimeShape.j == j  && !checkIfPositionHasGhost(i,j)){
 				context.drawImage(extraTime_img,center.x-15, center.y-15, cell_width, cell_height);
+			}
+			else if (slowMotionShape.i == i && slowMotionShape.j == j  && !checkIfPositionHasGhost(i,j)){
+				context.drawImage(slowMotion_img,center.x-15, center.y-15, cell_width, cell_height);
 			}
 		}
 	}
