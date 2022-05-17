@@ -512,7 +512,7 @@ function UpdatePosition() {
 	if(life == 0){
 		gameAudio.pause();
 		gameOverAudio.play();
-		window.alert("You can do better than ".concat(score.toString(), " points!"));
+		window.alert("You are better than ".concat(score.toString(), " points!"));
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
@@ -527,7 +527,7 @@ function UpdatePosition() {
 		if(score<100){
 			gameAudio.pause();
 			gameOverAudio.play();
-			window.alert("You can do better than ".concat(score.toString(), " points!"));
+			window.alert("You are better than ".concat(score.toString(), " points!"));
 		}
 		else{
 			window.alert("Winner!");
