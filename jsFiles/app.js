@@ -288,6 +288,7 @@ function ghostUpdatePosition(){
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
+		window.clearInterval(intervalExtraTime);
 		switchScreen("settings");
 	}
 }
@@ -515,6 +516,7 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
+		window.clearInterval(intervalExtraTime);
 		switchScreen("settings");
 		return 
 	}
@@ -534,6 +536,7 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
+		window.clearInterval(intervalExtraTime);
 		switchScreen("settings");
 		return 
 	}
