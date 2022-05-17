@@ -24,6 +24,7 @@ var positionY;
 
 var shape = new Object();
 var candyShape = new Object();
+var extraTimeShape = new Object();
 // goust params
 var ghostShape1 = new Object()
 var ghostShape2 = new Object()
@@ -37,17 +38,24 @@ var g2_img = new Image(10,10);
 var g3_img = new Image(10,10);
 var g4_img = new Image(10,10);
 var candy_img = new Image(10,10);
+extraTime_img = new Image(10,10);
 var wall_img = new Image(10,10);
+
+var gameAudio
+var gameOverAudio
 				
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
+	gameAudio = new Audio('songs/Pacman_theme_song.mp3');
+	gameOverAudio = new Audio('songs/Game_over.mp4');
 });
 
 function Start() {
 	pac_img.src = "./images/pacR.png";
 	wall_img.src = "./images/blue_wall.png";
 	candy_img.src = "./images/candy.png";
+	extraTime_img.src = "./images/extra_time.png";
 	g1_img.src = "./images/g1.png";
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
@@ -100,7 +108,7 @@ function Start() {
 		[4,0,4,4,4,0,4,4,0,4,0,4,0,4,0,4,4,0],
 		[0,0,4,4,0,0,4,4,0,4,0,4,4,4,0,0,0,0]
 		// [4,0,4,4,0,0,4,4,0,4,0,4,4,4,4,4,4,4]
-	]
+	];
 	
 	score = 0;
 	var cnt = 200;
@@ -166,43 +174,49 @@ function Start() {
 	var candy_place = findRandomEmptyCell(board);
 	candyShape.i = candy_place[0];
 	candyShape.j = candy_place[1];
+	var extraTime_place = findRandomEmptyCell(board);
+	extraTimeShape.i = extraTime_place[0];
+	extraTimeShape.j = extraTime_place[1];
 	intervalCandy = setInterval(candyUpdatePoisition,5000);
+	intervalExtraTime = setInterval(extraTimeUpdatePosition,5000);
 	interval = setInterval(UpdatePosition, 120);
 	//---------------------------------------------------------------gousts code
 	startGhostPositions()
-	intervalGhosts = setInterval(ghostUpdatePosition,999)
+	intervalGhosts = setInterval(ghostUpdatePosition,999);
 	//----------------------------------------------------------------------------
+	gameAudio.play();
+	gameAudio.loop=true;
 }
 
 function startGhostPositions(){
-	ghostShape1.i = 0
-	ghostShape1.j = 0
-	ghostShape2.i = - 1
-	ghostShape2.j = -1
-	ghostShape3.i = -1
-	ghostShape3.j = - 1
-	ghostShape4.i = - 1
-	ghostShape4.j = - 1
+	ghostShape1.i = 0;
+	ghostShape1.j = 0;
+	ghostShape2.i = - 1;
+	ghostShape2.j = -1;
+	ghostShape3.i = -1;
+	ghostShape3.j = - 1;
+	ghostShape4.i = - 1;
+	ghostShape4.j = - 1;
 	for(i=0;i<num_of_ghosts;i++){
 		if (i == 0){
-			board[0][0] = 0
-			ghostShape1.i = 0
-			ghostShape1.j = 0
+			board[0][0] = 0;
+			ghostShape1.i = 0;
+			ghostShape1.j = 0;
 		}
 		if (i == 1){
-			board[number_of_rows - 1][0] = 0
-			ghostShape2.i = number_of_cols - 1
-			ghostShape2.j = 0
+			board[number_of_rows - 1][0] = 0;
+			ghostShape2.i = number_of_cols - 1;
+			ghostShape2.j = 0;
 		}
 		if (i == 2){
-			board[0][number_of_cols - 1] = 0
-			ghostShape3.i = 0
-			ghostShape3.j = number_of_rows - 1
+			board[0][number_of_cols - 1] = 0;
+			ghostShape3.i = 0;
+			ghostShape3.j = number_of_rows - 1;
 		}
 		if (i == 3){
-			board[number_of_rows - 1][number_of_cols - 1] = 0
-			ghostShape4.i = number_of_cols - 1
-			ghostShape4.j = number_of_rows - 1
+			board[number_of_rows - 1][number_of_cols - 1] = 0;
+			ghostShape4.i = number_of_cols - 1;
+			ghostShape4.j = number_of_rows - 1;
 		}
 	}
 }
@@ -210,64 +224,66 @@ function startGhostPositions(){
 function collision(){
 	life--;
 	if (life == 1){
-		document.getElementById("heart2").style.visibility="hidden"
+		document.getElementById("heart2").style.visibility="hidden";
 	}
 	if (life == 2){
-		document.getElementById("heart3").style.visibility="hidden"
+		document.getElementById("heart3").style.visibility="hidden";
 	}
 	if (life == 3){
-		document.getElementById("heart4").style.visibility="hidden"
+		document.getElementById("heart4").style.visibility="hidden";
 	}
 	if (life == 4){
-		document.getElementById("heart5").style.visibility="hidden"
+		document.getElementById("heart5").style.visibility="hidden";
 	}
-	
-	window.clearInterval(intervalGhosts)
-	window.clearInterval(interval)
-	board[shape.i][shape.j] = 0
-	board[ghostShape1.i][ghostShape1.j] = 0
+	score -= 10;
+	window.clearInterval(intervalGhosts);
+	window.clearInterval(interval);
+	board[shape.i][shape.j] = 0;
+	board[ghostShape1.i][ghostShape1.j] = 0;
 	if (num_of_ghosts > 1){
-		board[ghostShape2.i][ghostShape2.j] = 0
+		board[ghostShape2.i][ghostShape2.j] = 0;
 	}
 	if (num_of_ghosts > 2){
-		board[ghostShape3.i][ghostShape3.j] = 0
+		board[ghostShape3.i][ghostShape3.j] = 0;
 	}
 	if (num_of_ghosts > 3){
-		board[ghostShape4.i][ghostShape4.j] = 0
+		board[ghostShape4.i][ghostShape4.j] = 0;
 	}
 	startGhostPositions()
 	var pac_place = findRandomEmptyCell(board);
 	shape.i = pac_place[0];
 	shape.j = pac_place[1];
-	intervalGhosts = setInterval(ghostUpdatePosition,999)
-	interval = setInterval(UpdatePosition,120)
+	intervalGhosts = setInterval(ghostUpdatePosition,999);
+	interval = setInterval(UpdatePosition,120);
 	Draw();	
 }
 
 function ghostUpdatePosition(){
-	ghostMove(ghostShape1)
+	ghostMove(ghostShape1);
 	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
-		collision()
+		collision();
 	}
 	if (num_of_ghosts > 1){
-		ghostMove(ghostShape2)
+		ghostMove(ghostShape2);
 		if (ghostShape2.i == shape.i && ghostShape2.j == shape.j){
-			collision()
+			collision();
 	}
 }
 	if (num_of_ghosts > 2){
-		ghostMove(ghostShape3)
+		ghostMove(ghostShape3);
 		if (ghostShape3.i == shape.i && ghostShape3.j == shape.j){
-			collision()	
+			collision();
 	}
 }
 	if (num_of_ghosts > 3){
-		ghostMove(ghostShape4)
+		ghostMove(ghostShape4);
 		if (ghostShape4.i == shape.i && ghostShape4.j == shape.j){
-			collision()
+			collision();
 	}
 }
 	if(life == 0){
+		gameAudio.pause();
+		gameOverAudio.play();
 		window.alert("You are better than ".concat(score.toString(), " points!"));
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
@@ -280,16 +296,16 @@ function checkDirection(board,i,j){
 	posibileMoves = new Array();
 	index = 0;
 	if (i < number_of_cols - 1  && board[i + 1][j] != 4){//right
-		posibileMoves[index++] = 'right'
+		posibileMoves[index++] = 'right';
 	}
 	if (i > 0 && board[i - 1][j] != 4){//left
-		posibileMoves[index++] = 'left'
+		posibileMoves[index++] = 'left';
 	}
 	if (j > 0 && board[i][j-1] != 4){//up
-		posibileMoves[index++] = 'up'
+		posibileMoves[index++] = 'up';
 	}
 	if (j < number_of_rows - 1 && board[i][j+1] != 4){//down
-		posibileMoves[index++] = 'down'
+		posibileMoves[index++] = 'down';
 	}
 	// console.log(posibileMoves)
 	return posibileMoves;
@@ -474,6 +490,12 @@ function UpdatePosition() {
 		candyShape.j = -1;
 		window.clearInterval(intervalCandy);
 	}
+	if (extraTimeShape.i == shape.i && extraTimeShape.j == shape.j){
+		game_long += 30
+		extraTimeShape.i = -1;
+		extraTimeShape.j = -1;
+		window.clearInterval(intervalExtraTime);
+	}
 	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
 		collision()
 	}
@@ -487,26 +509,33 @@ function UpdatePosition() {
 		collision()
 	}
 	if(life == 0){
-		window.alert("You are better than ".concat(score.toString(), " points!"));
+		gameAudio.pause();
+		gameOverAudio.play();
+		window.alert("You can do better than ".concat(score.toString(), " points!"));
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		switchScreen("settings");
+		return 
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if(game_long - time_elapsed <= 0.05){
 		if(score<100){
-			window.alert("You are better than ".concat(score.toString(), " points!"));
+			gameAudio.pause();
+			gameOverAudio.play();
+			window.alert("You can do better than ".concat(score.toString(), " points!"));
 		}
 		else{
 			window.alert("Winner!");
+			gameAudio.pause();
 		}
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		switchScreen("settings");
+		return 
 	}
 
 	// if (score >=100) {
@@ -521,6 +550,12 @@ function candyUpdatePoisition(){
 	var place = findRandomEmptyCell(board)
 	candyShape.i = place[0];
 	candyShape.j = place[1];
+}
+
+function extraTimeUpdatePosition(){
+	var extraTime_place = findRandomEmptyCell(board)
+	extraTimeShape.i = extraTime_place[0];
+	extraTimeShape.j = extraTime_place[1];
 }
 
 function Draw() {
@@ -572,6 +607,9 @@ function Draw() {
 			}
 			else if (candyShape.i == i && candyShape.j == j  && !checkIfPositionHasGhost(i,j)){
 				context.drawImage(candy_img,center.x-15, center.y-15, cell_width, cell_height);
+			}
+			else if (extraTimeShape.i == i && extraTimeShape.j == j  && !checkIfPositionHasGhost(i,j)){
+				context.drawImage(extraTime_img,center.x-15, center.y-15, cell_width, cell_height);
 			}
 		}
 	}

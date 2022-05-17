@@ -82,18 +82,13 @@ $(document).ready(function(){
 			}
 		}
 		,submitHandler: function (){
-			register();
-			//reset form details
+			let username = document.getElementById("reg-name").value;
+			let password = document.getElementById("reg-pass").value;
+			localStorage.setItem(username,password);
 			let form = $("#reg-form");
 			form[0].reset();
 			switchScreens(`Login-screen`);
+
 		}
 	});	
 });
-
-
-function register() {
-	let username = document.getElementById("reg-name").value;
-	let password = document.getElementById("reg-pass").value;
-    localStorage.setItem(username,password);
-};

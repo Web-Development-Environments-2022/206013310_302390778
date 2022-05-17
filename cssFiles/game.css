@@ -1,3 +1,7 @@
 #game, #score, #time{
     float: left;
 }
+
+#userName{
+    color: aliceblue;
+}

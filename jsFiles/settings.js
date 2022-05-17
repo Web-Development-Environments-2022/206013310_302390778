@@ -122,6 +122,8 @@ function startGame()
     document.getElementById("heart3").style.visibility="visible";
     document.getElementById("heart4").style.visibility="visible";
     document.getElementById("heart5").style.visibility="visible";
+    document.getElementById("userName").style.color="white";
+    document.getElementById("userName").innerText="User name: " + userOnline;
     Start();
 }
 
