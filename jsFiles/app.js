@@ -56,6 +56,7 @@ var wall_img = new Image(10,10);
 var gameAudio;
 var gameOverAudio;
 var winnerAudio;
+var collisionAudio;
 				
 
 $(document).ready(function() {
@@ -63,39 +64,22 @@ $(document).ready(function() {
 	gameAudio = new Audio('songs/Pacman_theme_song.mp3');
 	gameOverAudio = new Audio('songs/Game_over.mp4');
 	winnerAudio = new Audio('songs/winner_cut.mp3');
+	collisionAudio = new Audio('songs/collision_sound.mp3');
+	
 });
 
 function Start() {
 	pac_img.src = "./images/pacR.png";
 	wall_img.src = "./images/blue_wall.png";
 	candy_img.src = "./images/candy.png";
-	extraTime_img.src = "./images/extra_time.jpg";
-	slowMotion_img.src = "./images/slow_motion.jpg"
-	extraLife_img.src = "./images/extraLife.jpg"
+	extraTime_img.src = "./images/clock.png";
+	slowMotion_img.src = "./images/snail.png"
+	extraLife_img.src = "./images/extraLife.png"
 	g1_img.src = "./images/g1.png";
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
 	g4_img.src = "./images/g4.png";
-	
-	// board = [
-	// 	[4,4,4,4,4,4,0,0,0,4,4,4,4,4,4,4,4,4,0,4,4,4,4,4,4,4,0,4],
-	// 	[0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4],
-	// 	[0,0,4,0,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-	// 	[0,0,4,0,0,4,0,0,0,4,0,0,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-	// 	[4,0,4,4,4,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,0,4],
-	// 	[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-	// 	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
-	// 	[4,0,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4],
-	// 	[0,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,0,0,0,4],
-	// 	[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,4,4,4,4,4,4],
-	// 	[4,0,4,0,0,4,0,4,4,4,4,4,0,4,4,0,4,4,4,4,4,0,0,0,0,0,0,4],
-	// 	[0,0,4,4,0,4,0,4,4,0,0,0,0,0,0,0,0,0,0,4,4,0,4,0,4,4,0,4],
-	// 	[4,0,0,0,0,4,0,4,4,0,4,4,4,0,0,4,4,4,0,4,4,0,4,0,0,4,0,0],
-	// 	[4,4,4,4,4,4,0,4,4,0,4,0,0,0,0,0,0,4,0,4,4,0,4,4,4,4,4,0],
-	// 	[0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,4,0,4,0,0,0,0,0,0,0,0,0,4],
-	// 	[0,0,4,0,4,4,0,4,4,0,4,0,0,0,0,4,0,4,0,4,4,0,4,4,4,4,0,4],
-	// 	[4,4,4,4,4,4,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,0,4,4,4,4,0,4]	
-	// 	]
+
 	board = [
 		[0,0,0,0,4,4,4,4,0,4,4,0,4,4,0,0,0,0],
 		[4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0],
@@ -211,6 +195,7 @@ function Start() {
 	startGhostPositions()
 	intervalGhosts = setInterval(ghostUpdatePosition,1000);
 	//----------------------------------------------------------------------------
+	gameAudio.volume = 0.2;
 	gameAudio.play();
 	gameAudio.loop=true;
 }
@@ -414,6 +399,9 @@ function movePossible(ghostShape){
 //------------------------------------------------------------------goust func
 //-----------------------------------------------------------------
 function collision(){
+	collisionAudio.volume = 1;
+	collision.currentTime = 0;
+	collisionAudio.play();
 	life--;
 	if (life == 1){
 		document.getElementById("heart2").style.visibility="hidden";
@@ -589,7 +577,7 @@ function UpdatePosition() {
 	if(life == 0){
 		gameAudio.pause();
 		gameOverAudio.play();
-		window.alert("Loser!");
+		window.alert("Looser!");
 		stopGame();
 		switchScreen("settings");
 		return 
@@ -617,10 +605,6 @@ function UpdatePosition() {
 		switchScreen("settings");
 		return 
 	}
-
-	// if (score >=100) {
-	// 	// wall_img.src = "./images/wall.png"; // 
-	// }
 	else {
 		Draw();
 	}
@@ -688,10 +672,10 @@ function Draw() {
 				context.drawImage(g1_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
 			}
 			if (i == ghostShape2.i && j == ghostShape2.j){
-				context.drawImage(g2_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+				context.drawImage(g4_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
 			}
 			if (i == ghostShape3.i && j == ghostShape3.j){
-				context.drawImage(g3_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
+				context.drawImage(g1_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);
 			}
 			if (i == ghostShape4.i && j == ghostShape4.j){
 				context.drawImage(g4_img,center.x-15, center.y-15, 0.7*cell_width, 0.7*cell_height);

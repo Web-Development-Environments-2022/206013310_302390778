@@ -116,7 +116,7 @@ function startGame()
     basic_food_color = document.getElementById("basic").value;
     special_food_color = document.getElementById("special").value;
     gourmet_food_color = document.getElementById("gourmet").value;
-    $("#game").show();
+    // $("#game").show();
     life = 5;
     document.getElementById("heart2").style.visibility="visible";
     document.getElementById("heart3").style.visibility="visible";

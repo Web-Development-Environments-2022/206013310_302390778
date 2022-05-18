@@ -7,6 +7,7 @@ function getInfo() {
 		document.getElementById('login-username').value = "";
 		document.getElementById('login-pass').value = "";
 		switchScreen('settings');
+		// $("#game").show();
 		return;
 	}
     document.getElementById('login-pass').value = "";
