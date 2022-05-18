@@ -19,7 +19,7 @@ $(document).ready(function(){
 	
 
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		return this.optional(element) || /^[a-z]+$/i.test(value);
+		return this.optional(element) || /^[a-zA-Z\s]*$/i.test(value);
 	  },); 
 
 // 	jQuery.validator.addMethod("fullname", function(value, element) {
@@ -67,7 +67,7 @@ $(document).ready(function(){
 			},
 			password: {
 				required: "Required field",
-				strongPassword: "6 chars long and at least one number, upper and lower."
+				strongPassword: "6 chars long. At least one number and upper or lower."
 			},
 			fullname: {
 				required: "Required field",
@@ -85,10 +85,9 @@ $(document).ready(function(){
 			let username = document.getElementById("reg-name").value;
 			let password = document.getElementById("reg-pass").value;
 			localStorage.setItem(username,password);
+			switchScreen("Login-screen");
 			let form = $("#reg-form");
 			form[0].reset();
-			switchScreens(`Login-screen`);
-
 		}
 	});	
 });

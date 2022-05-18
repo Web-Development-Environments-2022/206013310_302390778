@@ -29,11 +29,12 @@ var shape = new Object();
 var candyShape = new Object();
 var extraTimeShape = new Object();
 var slowMotionShape = new Object();
+var extraLifeShape = new Object();
 // goust params
-var ghostShape1 = new Object()
-var ghostShape2 = new Object()
-var ghostShape3 = new Object()
-var ghostShape4 = new Object()
+var ghostShape1 = new Object();
+var ghostShape2 = new Object();
+var ghostShape3 = new Object();
+var ghostShape4 = new Object();
 //----------------------------
 
 var pac_img = new Image(10,10);
@@ -44,10 +45,11 @@ var g4_img = new Image(10,10);
 var candy_img = new Image(10,10);
 var extraTime_img = new Image(10,10);
 var slowMotion_img = new Image(10,10);
+var extraLife_img = new Image(10,10);
 var wall_img = new Image(10,10);
 
-var gameAudio
-var gameOverAudio
+var gameAudio;
+var gameOverAudio;
 				
 
 $(document).ready(function() {
@@ -62,6 +64,7 @@ function Start() {
 	candy_img.src = "./images/candy.png";
 	extraTime_img.src = "./images/extra_time.png";
 	slowMotion_img.src = "./images/slow_motion.jpg"
+	extraLife_img.src = "./images/extraLife.png"
 	g1_img.src = "./images/g1.png";
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
@@ -186,13 +189,17 @@ function Start() {
 	var slowMotion_place = findRandomEmptyCell(board);
 	slowMotionShape.i = slowMotion_place[0];
 	slowMotionShape.j = slowMotion_place[1];
-	intervalCandy = setInterval(candyUpdatePoisition,5000);
+	var extraLife_place = findRandomEmptyCell(board);
+	extraLifeShape.i = extraLife_place[0];
+	extraLifeShape.j = extraLife_place[1];
+	intervalCandy = setInterval(candyUpdatePoisition,1000);
 	intervalExtraTime = setInterval(extraTimeUpdatePosition,5000);
 	intervalSlowMotion = setInterval(slowMotionUpdatePosition, 5000);
+	intervalExtraLife = setInterval(extraLifeUpdatePosition,5000);
 	interval = setInterval(UpdatePosition, 120);
 	//---------------------------------------------------------------gousts code
 	startGhostPositions()
-	intervalGhosts = setInterval(ghostUpdatePosition,999);
+	intervalGhosts = setInterval(ghostUpdatePosition,500);
 	//----------------------------------------------------------------------------
 	gameAudio.play();
 	gameAudio.loop=true;
@@ -244,6 +251,9 @@ function collision(){
 	}
 	if (life == 4){
 		document.getElementById("heart5").style.visibility="hidden";
+	}
+	if (life == 5){
+		document.getElementById("heart6").style.visibility="hidden";
 	}
 	score -= 10;
 	window.clearInterval(intervalGhosts);
@@ -512,12 +522,31 @@ function UpdatePosition() {
 		window.clearInterval(intervalGhosts);
 		intervalGhosts = setInterval(ghostUpdatePosition,3000);
 		slowMotionTimmer = time_elapsed + 15;
-		console.log(slowMotionTimmer)
-		console.log(time_elapsed)
 		slowMotionShape.i = -1;
 		slowMotionShape.j = -1;
 		window.clearInterval(intervalSlowMotion);
 		activateSlowMotion = true;
+	}
+	if (extraLifeShape.i == shape.i && extraLifeShape.j == shape.j){
+		extraLifeShape.i = -1;
+		extraLifeShape.j = -1;
+		if(life == 1){
+			document.getElementById("heart2").style.visibility="visible";
+		}
+		if(life == 2){
+			document.getElementById("heart3").style.visibility="visible";
+		}
+		if(life == 3){
+			document.getElementById("heart4").style.visibility="visible";
+		}
+		if(life == 4){
+			document.getElementById("heart5").style.visibility="visible";
+		}
+		if(life == 5){
+			document.getElementById("heart6").style.visibility="visible";
+		}
+		life++;
+		window.clearInterval(intervalExtraLife);
 	}
 	if (ghostShape1.i == shape.i && ghostShape1.j == shape.j){
 		collision()
@@ -540,14 +569,13 @@ function UpdatePosition() {
 		window.clearInterval(intervalGhosts);
 		window.clearInterval(intervalExtraTime);
 		window.clearInterval(intervalSlowMotion);
+		window.clearInterval(intervalExtraLife);
 		switchScreen("settings");
 		return 
 	}
 	if(slowMotionTimmer - time_elapsed <= 0.05 && activateSlowMotion){
-		console.log(slowMotionTimmer)
-		console.log(time_elapsed)
 		window.clearInterval(intervalGhosts);
-		intervalGhosts = setInterval(ghostUpdatePosition,1000);
+		intervalGhosts = setInterval(ghostUpdatePosition,500);
 		activateSlowMotion = false;
 	}
 	board[shape.i][shape.j] = 2;
@@ -560,14 +588,15 @@ function UpdatePosition() {
 			window.alert("You are better than ".concat(score.toString(), " points!"));
 		}
 		else{
-			window.alert("Winner!");
 			gameAudio.pause();
+			window.alert("Winner!");
 		}
 		window.clearInterval(interval);
 		window.clearInterval(intervalCandy);
 		window.clearInterval(intervalGhosts);
 		window.clearInterval(intervalExtraTime);
 		window.clearInterval(intervalSlowMotion);
+		window.clearInterval(intervalExtraLife);
 		switchScreen("settings");
 		return 
 	}
@@ -581,9 +610,34 @@ function UpdatePosition() {
 }
 
 function candyUpdatePoisition(){
-	var place = findRandomEmptyCell(board)
-	candyShape.i = place[0];
-	candyShape.j = place[1];
+	while (true){
+		var direction = Math.floor(Math.random() * 4 + 1);
+		if (direction == 1) { // up
+			if (candyShape.j > 0 && board[candyShape.i][candyShape.j - 1] != 4) {
+				candyShape.j--;
+				break;
+			}
+		}
+		if (direction == 2) { // down
+			if (candyShape.j < board[0].length - 1 && board[candyShape.i][candyShape.j + 1] != 4) {
+				candyShape.j++;
+				break;
+			}
+		}
+		if (direction == 3) { // left
+			if (candyShape.i > 0 && board[candyShape.i - 1][candyShape.j] != 4) {
+				candyShape.i--;
+				break;
+			}
+		}
+		if (direction == 4) { // right
+			if (candyShape.i < board.length - 1 && board[candyShape.i + 1][candyShape.j] != 4) {
+				candyShape.i++;
+				break;
+			}
+		}	
+	}
+	Draw();
 }
 
 function extraTimeUpdatePosition(){
@@ -596,6 +650,12 @@ function slowMotionUpdatePosition(){
 	var slowMotion_place = findRandomEmptyCell(board);
 	slowMotionShape.i = slowMotion_place[0];
 	slowMotionShape.j = slowMotion_place[1];
+}
+
+function extraLifeUpdatePosition(){
+	var extraTime_place = findRandomEmptyCell(board);
+	extraLifeShape.i = extraTime_place[0];
+	extraLifeShape.j = extraTime_place[1];
 }
 
 function Draw() {
@@ -653,6 +713,9 @@ function Draw() {
 			}
 			else if (slowMotionShape.i == i && slowMotionShape.j == j  && !checkIfPositionHasGhost(i,j)){
 				context.drawImage(slowMotion_img,center.x-15, center.y-15, cell_width, cell_height);
+			}
+			else if (extraLifeShape.i == i && extraLifeShape.j == j  && !checkIfPositionHasGhost(i,j)){
+				context.drawImage(extraLife_img,center.x-15, center.y-15, cell_width, cell_height);
 			}
 		}
 	}
