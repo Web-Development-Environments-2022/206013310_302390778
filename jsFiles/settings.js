@@ -125,6 +125,7 @@ function startGame()
     document.getElementById("heart6").style.visibility="hidden";
     document.getElementById("userName").style.color="white";
     document.getElementById("userName").innerText="User name: " + userOnline;
+    winnerAudio.pause();
     Start();
 }
 

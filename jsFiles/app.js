@@ -50,12 +50,14 @@ var wall_img = new Image(10,10);
 
 var gameAudio;
 var gameOverAudio;
+var winnerAudio;
 				
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	gameAudio = new Audio('songs/Pacman_theme_song.mp3');
 	gameOverAudio = new Audio('songs/Game_over.mp4');
+	winnerAudio = new Audio('songs/winner_cut.mp3');
 });
 
 function Start() {
@@ -589,6 +591,7 @@ function UpdatePosition() {
 		}
 		else{
 			gameAudio.pause();
+			winnerAudio.play();
 			window.alert("Winner!");
 		}
 		window.clearInterval(interval);
