@@ -6,8 +6,9 @@ function getInfo() {
 	if (localStorage.getItem(username) == password){
 		document.getElementById('login-username').value = "";
 		document.getElementById('login-pass').value = "";
+		document.getElementById("userName").innerText="User name: " + userOnline;
+		document.getElementById("userName").style.color="white";
 		switchScreen('settings');
-		// $("#game").show();
 		return;
 	}
     document.getElementById('login-pass').value = "";

@@ -219,6 +219,8 @@ function stopGame(){
 	if(intervalExtraLife != null){
 		window.clearInterval(intervalExtraLife);
 	}
+	document.getElementById("lblTime").value = "";
+	document.getElementById("lblScore").value = "";
 }
 
 function startGhostPositions(){

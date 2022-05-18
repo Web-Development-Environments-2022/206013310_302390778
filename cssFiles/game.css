@@ -1,7 +1,4 @@
-#game, #score, #time{
-    float: left;
-}
 
 #userName{
-    color: aliceblue;
+    font-style: aliceblue;
 }
