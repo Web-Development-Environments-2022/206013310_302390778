@@ -9,6 +9,11 @@ var score;
 var start_time;
 var time_elapsed;
 var interval;
+var intervalCandy;
+var intervalGhosts;
+var intervalExtraTime;
+var intervalSlowMotion;
+var intervalExtraLife;
 var life = 5;
 
 var num_of_basic_food;
@@ -64,9 +69,9 @@ function Start() {
 	pac_img.src = "./images/pacR.png";
 	wall_img.src = "./images/blue_wall.png";
 	candy_img.src = "./images/candy.png";
-	extraTime_img.src = "./images/extra_time.png";
+	extraTime_img.src = "./images/extra_time.jpg";
 	slowMotion_img.src = "./images/slow_motion.jpg"
-	extraLife_img.src = "./images/extraLife.png"
+	extraLife_img.src = "./images/extraLife.jpg"
 	g1_img.src = "./images/g1.png";
 	g2_img.src = "./images/g2.jpg";
 	g3_img.src = "./images/g3.jpg";
@@ -178,6 +183,9 @@ function Start() {
 		},
 		false
 	);
+
+
+	//put all "players" in start position.
 	var pac_place = findRandomEmptyCell(board);
 	shape.i = pac_place[0];
 	shape.j = pac_place[1];
@@ -198,13 +206,34 @@ function Start() {
 	intervalExtraTime = setInterval(extraTimeUpdatePosition,5000);
 	intervalSlowMotion = setInterval(slowMotionUpdatePosition, 5000);
 	intervalExtraLife = setInterval(extraLifeUpdatePosition,5000);
-	interval = setInterval(UpdatePosition, 120);
+	interval = setInterval(UpdatePosition, 140);
 	//---------------------------------------------------------------gousts code
 	startGhostPositions()
-	intervalGhosts = setInterval(ghostUpdatePosition,500);
+	intervalGhosts = setInterval(ghostUpdatePosition,1000);
 	//----------------------------------------------------------------------------
 	gameAudio.play();
 	gameAudio.loop=true;
+}
+
+function stopGame(){
+	if(interval != null){
+		window.clearInterval(interval);
+	}
+	if(intervalCandy != null){
+		window.clearInterval(intervalCandy);
+	}
+	if(intervalGhosts != null){
+		window.clearInterval(intervalGhosts);
+	}
+	if(intervalExtraTime != null){
+		window.clearInterval(intervalExtraTime);
+	}
+	if(intervalSlowMotion != null){
+		window.clearInterval(intervalSlowMotion);
+	}
+	if(intervalExtraLife != null){
+		window.clearInterval(intervalExtraLife);
+	}
 }
 
 function startGhostPositions(){
@@ -240,45 +269,6 @@ function startGhostPositions(){
 	}
 }
 
-function collision(){
-	life--;
-	if (life == 1){
-		document.getElementById("heart2").style.visibility="hidden";
-	}
-	if (life == 2){
-		document.getElementById("heart3").style.visibility="hidden";
-	}
-	if (life == 3){
-		document.getElementById("heart4").style.visibility="hidden";
-	}
-	if (life == 4){
-		document.getElementById("heart5").style.visibility="hidden";
-	}
-	if (life == 5){
-		document.getElementById("heart6").style.visibility="hidden";
-	}
-	score -= 10;
-	window.clearInterval(intervalGhosts);
-	window.clearInterval(interval);
-	board[shape.i][shape.j] = 0;
-	board[ghostShape1.i][ghostShape1.j] = 0;
-	if (num_of_ghosts > 1){
-		board[ghostShape2.i][ghostShape2.j] = 0;
-	}
-	if (num_of_ghosts > 2){
-		board[ghostShape3.i][ghostShape3.j] = 0;
-	}
-	if (num_of_ghosts > 3){
-		board[ghostShape4.i][ghostShape4.j] = 0;
-	}
-	startGhostPositions()
-	var pac_place = findRandomEmptyCell(board);
-	shape.i = pac_place[0];
-	shape.j = pac_place[1];
-	intervalGhosts = setInterval(ghostUpdatePosition,999);
-	interval = setInterval(UpdatePosition,120);
-	Draw();	
-}
 
 function ghostUpdatePosition(){
 	ghostMove(ghostShape1);
@@ -307,11 +297,7 @@ function ghostUpdatePosition(){
 		gameAudio.pause();
 		gameOverAudio.play();
 		window.alert("You are better than ".concat(score.toString(), " points!"));
-		window.clearInterval(interval);
-		window.clearInterval(intervalCandy);
-		window.clearInterval(intervalGhosts);
-		window.clearInterval(intervalExtraTime);
-		window.clearInterval(intervalSlowMotion);
+		stopGame();
 		switchScreen("settings");
 	}
 }
@@ -427,7 +413,45 @@ function movePossible(ghostShape){
 
 //------------------------------------------------------------------goust func
 //-----------------------------------------------------------------
-
+function collision(){
+	life--;
+	if (life == 1){
+		document.getElementById("heart2").style.visibility="hidden";
+	}
+	if (life == 2){
+		document.getElementById("heart3").style.visibility="hidden";
+	}
+	if (life == 3){
+		document.getElementById("heart4").style.visibility="hidden";
+	}
+	if (life == 4){
+		document.getElementById("heart5").style.visibility="hidden";
+	}
+	if (life == 5){
+		document.getElementById("heart6").style.visibility="hidden";
+	}
+	score -= 10;
+	window.clearInterval(intervalGhosts);
+	window.clearInterval(interval);
+	board[shape.i][shape.j] = 0;
+	board[ghostShape1.i][ghostShape1.j] = 0;
+	if (num_of_ghosts > 1){
+		board[ghostShape2.i][ghostShape2.j] = 0;
+	}
+	if (num_of_ghosts > 2){
+		board[ghostShape3.i][ghostShape3.j] = 0;
+	}
+	if (num_of_ghosts > 3){
+		board[ghostShape4.i][ghostShape4.j] = 0;
+	}
+	startGhostPositions()
+	var pac_place = findRandomEmptyCell(board);
+	shape.i = pac_place[0];
+	shape.j = pac_place[1];
+	intervalGhosts = setInterval(ghostUpdatePosition,1000);
+	interval = setInterval(UpdatePosition,140);
+	Draw();	
+}
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() *(number_of_cols-1) + 1);
@@ -565,19 +589,14 @@ function UpdatePosition() {
 	if(life == 0){
 		gameAudio.pause();
 		gameOverAudio.play();
-		window.alert("You are better than ".concat(score.toString(), " points!"));
-		window.clearInterval(interval);
-		window.clearInterval(intervalCandy);
-		window.clearInterval(intervalGhosts);
-		window.clearInterval(intervalExtraTime);
-		window.clearInterval(intervalSlowMotion);
-		window.clearInterval(intervalExtraLife);
+		window.alert("Loser!");
+		stopGame();
 		switchScreen("settings");
 		return 
 	}
 	if(slowMotionTimmer - time_elapsed <= 0.05 && activateSlowMotion){
 		window.clearInterval(intervalGhosts);
-		intervalGhosts = setInterval(ghostUpdatePosition,500);
+		intervalGhosts = setInterval(ghostUpdatePosition,1000);
 		activateSlowMotion = false;
 	}
 	board[shape.i][shape.j] = 2;
@@ -592,14 +611,9 @@ function UpdatePosition() {
 		else{
 			gameAudio.pause();
 			winnerAudio.play();
-			window.alert("Winner!");
+			window.alert("Winner!!!");
 		}
-		window.clearInterval(interval);
-		window.clearInterval(intervalCandy);
-		window.clearInterval(intervalGhosts);
-		window.clearInterval(intervalExtraTime);
-		window.clearInterval(intervalSlowMotion);
-		window.clearInterval(intervalExtraLife);
+		stopGame();
 		switchScreen("settings");
 		return 
 	}

@@ -126,9 +126,10 @@ function startGame()
     document.getElementById("userName").style.color="white";
     document.getElementById("userName").innerText="User name: " + userOnline;
     winnerAudio.pause();
+    winnerAudio.currentTime = 0;
     gameAudio.pause();
     gameAudio.currentTime = 0;
-    gameAudio.play();
+    stopGame();
     Start();
 }
 

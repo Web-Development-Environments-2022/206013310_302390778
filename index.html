@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="cssFiles/welcome.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/register.css" lang="en"/>
 		<link rel="stylesheet" type="text/css" href="cssFiles/footer.css" lang="en">
+		<link rel="stylesheet" type="text/css" href="cssFiles/about.css" lang="en">
 		<link rel="shortcut icon" href="#">
 		<!-- <a href="https://www.flaticon.com/free-icons/gaming" title="gaming icons">Gaming icons created by inipagistudio - Flaticon</a> -->
 		<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Fredoka:wght@500&family=Handlee&display=swap" rel="stylesheet">
@@ -23,7 +24,7 @@
 				<a onclick="switchScreen('Welcome')">Welcome</a>
 				<a onclick="switchScreen('Register')">Register</a>
 				<a onclick="switchScreen('Login-screen')">Login</a>
-				<a onclick="switchScreen('About')">About</a>
+				<a onclick="showAbout()">About</a>
 			</nav>
 		</div>
 		<div id="content-continer">
@@ -174,22 +175,27 @@
 					<button type="button" id="login-btn" onclick="getInfo()">Log In</button>
 				</form>
 			</div>
-			<div id="About" class="screen">
-				about
+			<div id="About" class="screen" style="padding-bottom: 300px;">
+				<!-- <div id="myModal" class="modal">
+					<div class="modal-content">
+					  <span class="close">&times;</span>
+					  <p>Some text in the Modal..</p>
+					</div>
+				</div> -->
+				<!-- <dialog open id="about-dialog">
+					<p>Greetings, one and all!</p>
+					<form method="dialog">
+					  <button>OK</button>
+					</form>
+				</dialog> -->
+				<div id="popUpAbout">
+					<label>Hy! </label>
+					<div>
+						<button class="about-btn" type="button" id="about-btn-1" onclick="hideDialog()" style=" margin: 0px auto;">Close</button>
+					</div>
+				</div>
+				
 			</div>
-			<!-- code they gave us -->
-			<!-- <div id="game" class="screen" align="center">
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
-				</div>
-				<div id="time">
-					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
-				</div>
-				<canvas id="canvas" height="600" width="600"></canvas>			
-			</div> -->
-		</div>
 
 		<!--FOOTER-->
 		<div id="div-footer" class="footer" style="position: relative;">
@@ -271,6 +277,7 @@
 		<script type="text/javascript" src="./jsFiles/login.js"></script>
 		<script type="text/javascript" src="./jsFiles/settings.js"></script>
 		<script type="text/javascript" src="./jsFiles/register.js"></script>
+		<script type="text/javascript" src="./jsFiles/about.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
