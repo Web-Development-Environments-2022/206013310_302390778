@@ -602,6 +602,7 @@ function UpdatePosition() {
 			gameAudio.pause();
 			winnerAudio.play();
 			window.alert("Winner!!!");
+			
 		}
 		stopGame();
 		switchScreen("settings");
