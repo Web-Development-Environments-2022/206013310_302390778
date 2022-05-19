@@ -38,7 +38,7 @@
     letter-spacing:2px;
     display: inline;
     vertical-align: middle;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 }
 
 .footer-content, #uri, #shahar{
@@ -47,12 +47,6 @@
     font-size: 1em;
     display: inline;
 }
-/* 
-.social-links{
-    list-style: none;
-    text-decoration: none;
-    text-align: center;
-} */
 
 .social-links li{
     display: inline;
@@ -60,17 +54,7 @@
     text-decoration: none;
 }
 
-a, a img, .a img:visited{
-    text-decoration: none;
-    outline: none;
-    border: 0px none transparent;
-}
-.footer,
-.push {
-  height: 50px;
-}
-
 .content {
-    flex: 1 0 auto; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    flex: 1 0 auto; 
     padding: 20px;
   }

@@ -96,9 +96,26 @@ function setRandomSettings(){
 }
 
 
+function checkKeysMovmentsValid(){
+    if (chosen_key_code_up == chosen_key_code_down || chosen_key_code_up == chosen_key_code_left || chosen_key_code_up == chosen_key_code_right){
+        return false;
+    }
+    if (chosen_key_code_down == chosen_key_code_left || chosen_key_code_down == chosen_key_code_right){
+        return false;
+    }
+    if (chosen_key_code_left == chosen_key_code_right){
+        return false;
+    }
+    return true
+}
 
 function startGame()
 {
+    if(!checkKeysMovmentsValid()){
+        window.alert("You must choose differents keys for each movment diraction!");
+        return;
+
+    }
     if (document.getElementById("oneG").checked == true){
         num_of_ghosts = 1
     }

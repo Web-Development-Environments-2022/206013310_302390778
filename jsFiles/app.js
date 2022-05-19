@@ -57,6 +57,9 @@ var gameAudio;
 var gameOverAudio;
 var winnerAudio;
 var collisionAudio;
+var extraTimeAudio;
+var extraLifeAudio;
+var slowMotiomAudio;
 				
 
 $(document).ready(function() {
@@ -65,6 +68,15 @@ $(document).ready(function() {
 	gameOverAudio = new Audio('songs/Game_over.mp4');
 	winnerAudio = new Audio('songs/winner_cut.mp3');
 	collisionAudio = new Audio('songs/collision_sound.mp3');
+	extraTimeAudio = new Audio('songs/extra_time.mp3');
+	extraLifeAudio = new Audio('songs/extra_life.mp3');
+	slowMotiomAudio = new Audio('songs/snail.mp3');
+	window.addEventListener("keydown", function(e) {
+		// space and arrow keys
+		if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+			e.preventDefault();
+		}
+	}, false);
 	
 });
 
@@ -107,7 +119,6 @@ function Start() {
 		[4,0,4,4,4,0,4,4,0,4,0,0,0,4,0,4,0,0],
 		[4,0,4,4,4,0,4,4,0,4,0,4,0,4,0,4,4,0],
 		[0,0,4,4,0,0,4,4,0,4,0,4,4,4,0,0,0,0]
-		// [4,0,4,4,0,0,4,4,0,4,0,4,4,4,4,4,4,4]
 	];
 	
 	score = 0;
@@ -529,12 +540,16 @@ function UpdatePosition() {
 		window.clearInterval(intervalCandy);
 	}
 	if (extraTimeShape.i == shape.i && extraTimeShape.j == shape.j){
+		extraTimeAudio.volume = 1;
+		extraTimeAudio.currentTime = 0;
+		extraTimeAudio.play();
 		game_long += 30
 		extraTimeShape.i = -1;
 		extraTimeShape.j = -1;
 		window.clearInterval(intervalExtraTime);
 	}
 	if (slowMotionShape.i == shape.i && slowMotionShape.j == shape.j){
+		gameAudio.playbackRate = 0.5
 		window.clearInterval(intervalGhosts);
 		intervalGhosts = setInterval(ghostUpdatePosition,3000);
 		slowMotionTimmer = time_elapsed + 15;
@@ -544,6 +559,9 @@ function UpdatePosition() {
 		activateSlowMotion = true;
 	}
 	if (extraLifeShape.i == shape.i && extraLifeShape.j == shape.j){
+		extraLifeAudio.volume = 1;
+		extraLifeAudio.currentTime = 0;
+		extraLifeAudio.play();
 		extraLifeShape.i = -1;
 		extraLifeShape.j = -1;
 		if(life == 1){
@@ -585,9 +603,13 @@ function UpdatePosition() {
 		return 
 	}
 	if(slowMotionTimmer - time_elapsed <= 0.05 && activateSlowMotion){
+		slowMotiomAudio.volume = 1;
+		slowMotiomAudio.currentTime = 0;
+		slowMotiomAudio.play();
 		window.clearInterval(intervalGhosts);
 		intervalGhosts = setInterval(ghostUpdatePosition,1000);
 		activateSlowMotion = false;
+		gameAudio.playbackRate = 1
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
