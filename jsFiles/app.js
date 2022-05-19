@@ -204,7 +204,7 @@ function Start() {
 	interval = setInterval(UpdatePosition, 140);
 	//---------------------------------------------------------------gousts code
 	startGhostPositions()
-	intervalGhosts = setInterval(ghostUpdatePosition,1000);
+	intervalGhosts = setInterval(ghostUpdatePosition,700);
 	//----------------------------------------------------------------------------
 	gameAudio.volume = 0.2;
 	gameAudio.play();
@@ -449,7 +449,7 @@ function collision(){
 	var pac_place = findRandomEmptyCell(board);
 	shape.i = pac_place[0];
 	shape.j = pac_place[1];
-	intervalGhosts = setInterval(ghostUpdatePosition,1000);
+	intervalGhosts = setInterval(ghostUpdatePosition,700);
 	interval = setInterval(UpdatePosition,140);
 	Draw();	
 }
@@ -607,7 +607,7 @@ function UpdatePosition() {
 		slowMotiomAudio.currentTime = 0;
 		slowMotiomAudio.play();
 		window.clearInterval(intervalGhosts);
-		intervalGhosts = setInterval(ghostUpdatePosition,1000);
+		intervalGhosts = setInterval(ghostUpdatePosition,700);
 		activateSlowMotion = false;
 		gameAudio.playbackRate = 1
 	}
